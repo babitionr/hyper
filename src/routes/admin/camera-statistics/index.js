@@ -18,10 +18,6 @@ const Page = () => {
     setType(key);
     return navigate(routerLinks('CameraStatistics') + `?tab=${key}`);
   };
-  const items = [
-    { label: 'Khách hàng', key: 'customer', children: type === 'customer' ? <Customer type={type} /> : null },
-    { label: 'Nhân viên', key: 'staff', children: type === 'staff' ? <Staff type={type} /> : null },
-  ];
 
   return (
     <Fragment>
@@ -30,13 +26,12 @@ const Page = () => {
           <h1 className="text-zinc-600 font-bold text-lg mb-4">{'Thống kê camera'.toUpperCase()}</h1>
           <div>
             <Tabs defaultActiveKey={1} onTabClick={handleChangeTab} activeKey={String(tabName)}>
-              {/* <Tabs.TabPane tab="" key="">
+              <Tabs.TabPane tab="Khách hàng" key="customer">
                 {type === 'customer' ? <Customer type={type} /> : null}
               </Tabs.TabPane>
-              <Tabs.TabPane tab="" key="">
+              <Tabs.TabPane tab="Nhân viên" key="staff">
                 {type === 'staff' ? <Staff type={type} /> : null}
-              </Tabs.TabPane> */}
-              <Tabs activeKey={type} onChange={setType} items={items}></Tabs>
+              </Tabs.TabPane>
             </Tabs>
           </div>
         </div>

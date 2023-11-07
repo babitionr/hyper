@@ -160,86 +160,7 @@ const Page = () => {
   // useEffect(() => {
   //   initFunction();
   // }, [initFunction, pathname]);
-  const items = [
-    {
-      label: 'Hồ sơ',
-      key: '1',
-      children:
-        checkPermission('MANAGE_CUSTOMER_INFO') & (tabName === 'TeethProfile') ? (
-          <Profile data={data} idCustomer={idCustomer} checkPermission={checkPermission} />
-        ) : (
-          <></>
-        ),
-    },
-    {
-      label: 'Khám tổng quát',
-      key: '8',
-      children:
-        tabName === 'CustomerExamination' ? (
-          <CustomerExamination
-            user={data}
-            cusName={data?.fullName}
-            idCustomer={idCustomer}
-            checkPermission={checkPermission}
-          ></CustomerExamination>
-        ) : (
-          <></>
-        ),
-    },
-    {
-      label: 'Tình trạng răng',
-      key: '2',
-      children:
-        tabName === 'TeethStatus' ? (
-          <TeethStatus user={data} cusName={data?.fullName} checkPermission={checkPermission}></TeethStatus>
-        ) : (
-          <></>
-        ),
-    },
-    {
-      label: 'Phiếu điều trị',
-      key: '3',
-      children:
-        checkPermission('MANAGE_CUSTOMER_SO') & (tabName === 'TreatmentSlip') ? (
-          <TreatmentSlip
-            searchParams={searchParams}
-            data={data}
-            cusName={data?.fullName}
-            idCustomer={idCustomer}
-            checkPermission={checkPermission}
-          ></TreatmentSlip>
-        ) : (
-          <></>
-        ),
-    },
-    {
-      label: 'Công nợ',
-      key: '4',
-      children: checkPermission('MANAGE_CUSTOMER_DEBT') & (tabName === 'Debt') ? <Dept data={data} /> : <></>,
-    },
-    {
-      label: 'Labo',
-      key: '5',
-      children:
-        checkPermission('MANAGE_CUSTOMER_LABO') & (tabName === 'Labo') ? (
-          <Labo searchParams={searchParams} data={data} cusName={data?.fullName} idCustomer={idCustomer} />
-        ) : (
-          <></>
-        ),
-    },
-    {
-      label: 'Lịch hẹn',
-      key: '6',
-      children:
-        checkPermission('MANAGE_CUSTOMER_CALENDAR') & (tabName === 'Calendar') ? <Calendar data={data} /> : <></>,
-    },
-    {
-      label: 'Bảo hành',
-      key: '7',
-      children:
-        checkPermission('MANAGE_CUSTOMER_WARRANTY') & (tabName === 'Guarantee') ? <Guarantee data={data} /> : <></>,
-    },
-  ];
+
   return (
     <Fragment>
       <div className="min-h-screen">
@@ -263,7 +184,7 @@ const Page = () => {
               onTabClick={callbackTabClicked}
               activeKey={convertKeyTab(tabName) || 1}
             >
-              {/* {checkPermission('MANAGE_CUSTOMER_INFO') ? (
+              {checkPermission('MANAGE_CUSTOMER_INFO') ? (
                 <Tabs.TabPane tab="Hồ sơ" key="1">
                   {tabName === 'TeethProfile' ? (
                     <Profile data={data} idCustomer={idCustomer} checkPermission={checkPermission} />
@@ -333,8 +254,7 @@ const Page = () => {
                 <Tabs.TabPane tab="Bảo hành" key="7">
                   {tabName === 'Guarantee' ? <Guarantee data={data} /> : <></>}
                 </Tabs.TabPane>
-              ) : null} */}
-              <Tabs activeKey={data} onChange={setData} items={items}></Tabs>
+              ) : null}
             </Tabs>
           </div>
         </div>
