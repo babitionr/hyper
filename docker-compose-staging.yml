@@ -1,0 +1,11 @@
+version: '3'
+services:          
+    frontend:
+        build: 
+            context : .
+            args:
+                ENV: staging 
+
+        container_name: fe
+        ports:
+            - "8056:80"

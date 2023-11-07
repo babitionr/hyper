@@ -1,0 +1,12 @@
+version: '3'
+services:          
+    frontend:
+        build: 
+            context : .
+            args:
+                ENV: uat 
+
+        container_name: frontend-uat
+        ports:
+            - "80:80"
+            - "443:443"

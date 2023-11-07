@@ -1,0 +1,166 @@
+{
+  "components": {
+    "calendar": {
+      "more": "xem thêm"
+    },
+    "datatable": {
+      "pleaseEnterValueToSearch": "Tìm kiếm",
+      "reset": "Cài lại",
+      "search": "Tìm kiếm",
+      "areYouSureWant": "Bạn có chắc muốn xóa ?",
+      "cancel": "Huỷ bỏ",
+      "ok": "Đồng ý"
+    },
+    "form": {
+      "ruleRequired": "Đây là trường bắt buộc!",
+      "ruleEmail": "Vui lòng nhập địa chỉ email hợp lệ!",
+      "ruleUsername": "Tên người dùng không chứa các ký tự đặc biệt, chỉ bao gồm chữ cái và chữ số!",
+      "ruleMinLength": "Vui lòng nhập ít hơn {{min}} ký tự!",
+      "ruleMaxLength": "Vui lòng nhập tối đa phải có {{max}} ký tự!",
+      "ruleMinNumberLength": "Vui lòng nhập ít hơn {{min}} ký tự số!",
+      "ruleMaxNumberLength": "Vui lòng nhập tối đa phải có {{max}} ký tự số!",
+      "ruleMin": "Vui lòng nhập số {{min}} tối thiểu!",
+      "ruleMax": "Vui lòng nhập số {{max}} đối đa!",
+      "ruleMaxSize": "Bạn chỉ có thể tải lên tối đa {{max}}mb!",
+      "only text": "Vui lòng nhập chỉ nhập chữ!",
+      "only number": "Vui lòng nhập chỉ nhập số!",
+      "rulePassword": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa và một số!",
+      "confirm": "Xác nhận",
+      "ruleConfirmPassword": "Hai mật khẩu bạn nhập không nhất quán!",
+      "incorrectPathFormat": "Định dạng đường dẫn không đúng",
+      "Enter": "Nhập",
+      "Upload": "Tải lên",
+      "modal": {
+        "save": "Lưu lại",
+        "cancel": "Huỷ bỏ"
+      }
+    },
+    "media-management": {
+      "filename": "Tên tệp",
+      "fileSize": "Kích thước tập tin",
+      "lastModified": "Sửa đổi lần cuối",
+      "detail": "Chi tiết",
+      "areYouSure": "Bạn có chắc chắn muốn xóa?",
+      "mediaManagement": "Quản lý phương tiện truyền thông",
+      "filesOnSystem": "Tệp trên hệ thống",
+      "addFiles": "Thêm các tập tin",
+      "multiFiles": "Nhiều tệp",
+      "createFolder": "Tạo thư mục",
+      "uploadFile": "Tải lên tệp",
+      "moveUpLevel": "Tiến lên một cấp độ",
+      "outsideLink": "Liên kết bên ngoài",
+      "save": "Lưu lại",
+      "nameFolder": "Tên thư mục",
+      "onlyLettersAndDigitsAllowed": "Chỉ cho phép các chữ cái và chữ số"
+    },
+    "message": {
+      "Success": "Thành công",
+      "Fail": "Thất bại",
+      "Close": "Đóng",
+      "Ok": "Xác nhận"
+    }
+  },
+  "titles": {
+    "Reset Password": "Đặt lại mật khẩu",
+    "Forgot Password": "Quên mật khẩu",
+    "Send Otp": "Quên mật khẩu",
+    "Login": "Đăng nhập",
+    "Register": "Đăng ký",
+    "Manage": "Quản lý",
+    "Chat": "Trò chuyện",
+    "Search": "Tra cứu dữ liệu",
+    "Dashboard": "Tra cứu dữ liệu",
+    "User": "Quản Lý Người Dùng",
+    "Home": "Trang chủ",
+    "Customer": "Quản lý Khách hàng",
+    "AppointmentSchedule": "Lịch hẹn",
+    "Customer Information": "Quản lý thông tin khách",
+    "Services": "Dịch vụ",
+    "User Management": "Quản lý người dùng",
+    "Branchs": "Danh sách chi nhánh",
+    "Supplier": "Nhà cung cấp",
+    "Medicine": "Thuốc",
+    "Supplies": "Vật tư",
+    "Setting": "Thiết lập",
+    "CustomerDetail": "Chi tiết khách hàng",
+    "Labo": "Labo",
+    "LaboParameter": "Thông số Labo",
+    "InventoryCriteria": "Tiêu chí kiểm kho",
+    "InventoryManagement": "Quản lý kho",
+    "Marketing": "Marketing",
+    "Organization": "Quản lý tổ chức",
+    "RevenueExpenditure": "Thu chi",
+    "InventoryControlCreate": "Kiểm kho",
+    "Settings": "Thiết lập",
+    "Costs": "Loại chi phí",
+    "Notification": "Thông báo",
+    "Permission": "Phân quyền",
+    "Profile": "Thông tin cá nhân",
+    "Report": "Báo cáo",
+    "CameraStatistics": "Thống kê camera"
+
+  },
+  "columns": {
+    "auth": {
+      "login": {
+        "Username": "Tên đăng nhập",
+        "Enter Username": "Nhập tên đăng nhập",
+        "Enter Password": "Nhập mật khẩu",
+        "password": "Mật khẩu",
+        "remember": "Ghi nhớ",
+        "New password": "Mật khẩu mới",
+        "Enter new password": "Nhập mật khẩu mới",
+        "Confirm Password": "Xác nhận mật khẩu"
+      },
+      "reset-password": {
+        "Recovery Email": "Email khôi phục",
+        "Enter Recovery Email": "Nhập Email khôi phục"
+      }
+    },
+    "admin": {
+      "columnAdmin": {}
+    }
+  },
+  "layout": {
+    "footer": "Copyright ©{{year}} Hyper Tech. All rights reserved."
+  },
+  "routes": {
+    "auth": {
+      "login": {
+        "title": "Đăng nhập",
+        "subTitle": "Nhập thông tin chi tiết của bạn để đăng nhập vào tài khoản của bạn",
+        "Log In": "Đăng nhập",
+        "Forgot Password": "Quên mật khẩu",
+        "Confirm Password": "Xác nhận mật khẩu",
+        "Reset Password": "Xác nhận",
+        "New password": "Mật khẩu mới",
+        "Enter new password": "Nhập mật khẩu mới"
+      },
+      "reset-password": {
+        "Recovery Email": "Email khôi phục",
+        "Enter Recovery Email": "Email khôi phục",
+        "title": "Đặt lại mật khẩu",
+        "Submit": "Gửi đi",
+        "Back To Login": "Quay lại đăng nhập"
+      }
+    },
+    "admin": {
+      "Layout": {
+        "Search": "Tìm kiếm",
+        "English": "Tiếng Anh",
+        "Vietnam": "Tiếng Việt",
+        "Available": "Có sẵn",
+        "Account Setting": "Thiết lập tài khoản",
+        "Sign out": "Đăng xuất",
+        "Mark all as read": "Đánh dấu tất cả là đã đọc",
+        "Setting": "Cài đặt",
+        "Notifications": "Thông báo",
+        "See All": "Xem tất cả",
+        "Add": "Thêm mới",
+        "Edit": "Sửa",
+        "Delete": "Xóa"
+      },
+      "dashboard": {}
+    }
+  }
+}

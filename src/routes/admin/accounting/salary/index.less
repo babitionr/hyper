@@ -1,0 +1,104 @@
+ .accounting-attenance-table {
+
+   .ant-table-thead tr th {
+     background-color: #f4f4f5 !important;
+   }
+ }
+
+ .custom-month-picket-accoutning-attentance {
+   .ant-picker-month-panel {
+     .ant-picker-cell-disabled::before {
+       height: 100%;
+     }
+
+     .ant-picker-body {
+       padding: 0;
+
+       .ant-picker-cell-inner {
+         display: inline-flex;
+         text-align: center;
+         align-items: center;
+         height: 100%;
+       }
+     }
+   }
+ }
+
+ .ant-steps {
+  .ant-steps-item-content {
+    .ant-steps-item-title {
+      @apply text-xs;
+    }
+  }
+
+  // .ant-steps-item-icon{
+  //   @apply bg-gray-300;
+  // }
+  // .ant-steps-finish-icon{
+  //   @apply bg-rose-500;
+  // }
+
+  .ant-steps-item-finish .ant-steps-item-icon>.ant-steps-icon {
+    top: -4px;
+    color: white;
+  }
+
+  .ant-steps-item-finish .ant-steps-item-icon {
+    border-color: rgb(244, 63, 94);
+    background-color: rgb(244, 63, 94);
+  }
+
+  .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after {
+    background-color: rgb(244, 63, 94);
+
+  }
+
+  .ant-steps-item-process>.ant-steps-item-container>.ant-steps-item-icon {
+    background-color: rgb(244, 63, 94);
+    border-color: rgb(244, 63, 94);
+  }
+}
+
+
+
+
+.search-container {
+  @apply relative;
+
+  .ant-input-group-addon {
+    @apply hidden;
+  }
+
+  .ant-input-suffix {
+    position: absolute;
+    right: 10px;
+    top: 9px;
+
+    .ant-input-clear-icon-hidden {
+      visibility: hidden;
+    }
+  }
+
+  .ant-input-affix-wrapper {
+    // height: 45px;
+    // border: 1px solid #e5e7eb !important;
+    // border-radius: 10px !important;
+    background: #fff;
+    padding: 0;
+    // overflow: hidden;
+
+    .ant-input {
+      border: 1px solid #E5E7EB;
+      border-radius: 10px;
+      height: 40px;
+      background: #fff;
+      width: 320px;
+      padding-left: 55px;
+      font-size: 14px;
+    }
+  }
+  input {
+    padding: 0 16px !important;
+  }
+}
+

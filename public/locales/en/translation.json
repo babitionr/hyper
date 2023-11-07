@@ -1,0 +1,145 @@
+{
+  "components": {
+    "calendar": {
+      "more": "more"
+    },
+    "datatable": {
+      "pleaseEnterValueToSearch": "Search",
+      "reset": "Reset",
+      "search": "Search",
+      "areYouSureWant": "Are you sure want delete ?",
+      "cancel": "Cancel",
+      "ok": "Ok"
+    },
+    "form": {
+      "ruleRequired": "This is a required field!",
+      "ruleEmail": "Please enter a valid email address!",
+      "ruleUsername": "Username contains no special characters, only letters and numbers!",
+      "ruleMinLength": "Please enter at least {{min}} characters!",
+      "ruleMaxLength": "Please enter maximum {{max}} characters!",
+      "ruleMinNumberLength": "Please enter at least {{min}} number characters!",
+      "ruleMaxNumberLength": "Please enter maximum {{max}} number characters!",
+      "ruleMin": "Please enter minimum {{min}} number!",
+      "ruleMax": "Please enter maximum {{max}} number!",
+      "ruleMaxSize": "You can only upload up to {{max}}mb!",
+      "only text": "Please enter only text!",
+      "only number": "Please enter only number!",
+      "rulePassword": "Password must contain at least one uppercase letter and one number!",
+      "confirm": "Confirm",
+      "ruleConfirmPassword": "Two passwords that you enter is inconsistent!",
+      "incorrectPathFormat": "Incorrect path format",
+      "Enter": "Enter",
+      "Upload": "Upload",
+      "modal": {
+        "save": "Save",
+        "cancel": "Cancel"
+      }
+    },
+    "media-management": {
+      "filename": "File name",
+      "fileSize": "File size",
+      "lastModified": "Last modified",
+      "detail": "Detail",
+      "areYouSure": "Are you sure you want to delete?",
+      "mediaManagement": "Media Management",
+      "filesOnSystem": "Files on system",
+      "addFiles": "Add files",
+      "multiFiles": "Multi files",
+      "createFolder": "Create folder",
+      "uploadFile": "Upload file",
+      "moveUpLevel": "Move up a level",
+      "outsideLink": "Outside link",
+      "save": "Save",
+      "nameFolder": "Name folder",
+      "onlyLettersAndDigitsAllowed": "Only letters and digits allowed"
+    },
+    "message": {
+      "Success": "Thành công",
+      "Fail": "Thất bại",
+      "Close": "Đóng",
+      "Ok":"Xác nhận"
+    }
+  },
+  "titles": {
+    "Reset Password": "Reset Password",
+    "Login": "Login",
+    "Register": "Register",
+    "Manage": "Manage",
+    "Chat": "Chat",
+    "Search": "Search",
+    "Dashboard": "Dashboard",
+    "User": "User",
+    "Home": "Home",
+    "Customer": "Customer",
+    "AppointmentSchedule": "Appointment",
+    "Branchs": "Branchs",
+    "Supplier": "Supplier",
+    "Setting":"Setting",
+    "CustomerDetail": "Customer Detail",
+    "Labo": "Labo",
+    "LaboParameter": "LaboParameter",
+    "InventoryCriteria": "Inventory Criteria",
+    "InventoryManagement": "Inventory Management",
+    "RevenueExpenditure": "Revenue Expenditure",
+    "InventoryControlCreate": "Inventory Control",
+    "Settings": "Settings",
+    "Costs": "Costs",
+    "Notification": "Notification",
+    "Permission": "Permission",
+    "Profile": "Profile",
+    "Report": "Report",
+    "CameraStatistics": "Camera Statistics"
+  },
+  "columns": {
+    "auth": {
+      "login": {
+        "Username": "Username",
+        "Enter Username": "Enter Username",
+        "Enter Password": "Enter Password",
+        "password": "Password",
+        "remember": "Remember Me",
+        "New password": "New password",
+        "Enter new password": "Enter new password"
+      }
+    },
+    "admin": {
+      "columnAdmin": {
+      }
+    }
+  },
+  "layout": {
+    "footer": "Copyright ©{{year}} Hyper Tech. All rights reserved."
+  },
+  "routes": {
+    "auth": {
+      "login": {
+        "title": "Sign In",
+        "subTitle": "Enter your details to login to your account",
+        "Log In": "Log In",
+        "Forgot Password": "Forgot Password",
+        "Confirm Password": "Confirm Password",
+        "Reset password": "Reset Password"
+      }
+    },
+    "admin": {
+      "Layout": {
+        "Search": "Search",
+        "English": "English",
+        "Vietnam": "Vietnamese",
+        "Available": "Available",
+        "Account Setting": "Account Setting",
+        "Sign out": "Sign out",
+        "Mark all as read": "Mark all as read",
+        "Setting": "Setting",
+        "Notifications": "Notifications",
+        "See All": "See All",
+        "Add": "Add new",
+        "Edit": "Edit",
+        "Delete": "Delete"
+      },
+      "dashboard": {}
+
+
+    }
+  }
+}

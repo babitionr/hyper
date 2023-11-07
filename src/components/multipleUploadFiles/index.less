@@ -1,0 +1,38 @@
+.mutiple-upload-file-list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.multiple-upload-drag span:has(.ant-upload-drag) {
+  width: inherit;
+}
+.ant-upload .ant-upload-btn{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoomImagePreview input[type=checkbox] {
+  display: none;
+}
+
+.zoomImagePreview img {
+  transition: transform 0.25s ease;
+  cursor: zoom-in;
+  transform-origin: top center;
+
+}
+
+.zoomImagePreview input[type=checkbox]:checked ~ label > img {
+  transform: scale(2);
+  transform-origin: top center;
+  cursor: zoom-out;
+  transition: transform 0.25s ease;
+
+}

@@ -1,0 +1,278 @@
+@import '../fonts/stylesheet.css';
+@import '../fonts/icon/style.css';
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+@import '~glightbox/dist/css/glightbox.css';
+@import '~line-awesome/dist/line-awesome/css/line-awesome.css';
+
+@import '/src/components';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  img {
+    @apply inline-block;
+  }
+}
+
+body {
+  font-family: 'Lexend Deca', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Noto Sans, Ubuntu, Droid Sans,
+    Helvetica Neue, sans-serif;
+  @apply text-sm overflow-x-hidden text-gray-500 bg-blue-50;
+
+  .swal2-close:focus {
+    @apply shadow-none;
+  }
+}
+
+*> {
+  .loop-intro-x(9);
+}
+
+.loop-intro-x(@counter) when (@counter > 0) {
+  .loop-intro-x((@counter - 1)); // next iteration
+
+  .intro-x:nth-child(@{counter}) {
+    @apply translate-x-12;
+  }
+
+  .-intro-x:nth-child(@{counter}) {
+    @apply -translate-x-12;
+  }
+
+  .-intro-x:nth-child(@{counter}),
+  .intro-x:nth-child(@{counter}) {
+    opacity: 0;
+    z-index: (10 - @counter);
+    animation: intro-x-animation 0.4s ease-in-out 0.33333s;
+    animation-fill-mode: forwards;
+    animation-delay:~'0.@{counter}s';
+  }
+}
+
+@keyframes intro-x-animation {
+  to {
+    @apply opacity-100 -translate-x-0;
+  }
+}
+
+.ant-btn {
+  @apply border border-gray-300 text-sm rounded-lg mr-2 px-2;
+
+  &.ant-btn-primary {
+    @apply bg-blue-500 text-white;
+  }
+}
+
+.ant-input {
+  @apply bg-gray-100;
+}
+
+.ant-select-dropdown {
+  @apply  !py-0 rounded-xl text-gray-500;
+
+  .ant-select-item-option {
+    @apply text-gray-500;
+  }
+
+  .ant-select-item-option-selected {
+    @apply bg-gray-100;
+  }
+}
+
+//table
+.ant-table {
+  @apply bg-transparent;
+}
+
+.ant-table-row-level-0 {
+  @apply bg-white;
+}
+
+.ant-table-row-level-0 td:last-child {
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+#idTable_prev_10,
+#idTable_prev,
+#idTable_next,
+#idTable_next_10 {
+  @apply text-teal-900;
+}
+
+//pagination
+.data-table {
+  .right {
+    @apply bg-transparent;
+
+    .pointer-events-none {
+      @apply  !text-gray-300;
+    }
+
+    .bg-blue-500 {
+      @apply  !bg-red-500 text-white;
+    }
+
+    button {
+      @apply h-8 rounded-xl text-teal-900;
+    }
+  }
+
+  #idTable_input_search {
+    @apply pl-8;
+  }
+
+  .la-search {
+    @apply left-3 w-4 -rotate-90;
+  }
+}
+
+//alert popup
+.swal2-popup {
+  @apply  !pb-0 rounded-tr-xl rounded-tl-xl;
+
+  .swal2-actions {
+    @apply  !w-full bg-gray-100 !py-2 rounded-br-xl rounded-bl-xl;
+
+    .swal2-confirm {
+      @apply  !bg-red-500;
+    }
+
+    .swal2-cancel {
+      border: 1px solid !important;
+      @apply text-teal-900 !bg-white;
+    }
+  }
+}
+
+.ant-table-tbody>tr.ant-table-placeholder:hover>td {
+  @apply bg-transparent;
+}
+
+.ant-table-content .ant-table-thead>tr>th {
+  @apply font-normal;
+}
+
+.ant-table-content {
+  overflow: hidden !important;
+}
+
+.ant-table {
+  &-content {
+    .ant-table-thead>tr>th {
+      font-weight: 700 !important;
+    }
+  }
+}
+
+footer {
+  @apply  !bg-white p-4 flex pl-5;
+}
+
+.ant-picker {
+  @apply bg-gray-100 w-full;
+}
+
+//button submit form
+#idSubmit {
+  @apply hover:bg-teal-700;
+}
+
+.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  @apply  !rounded-lg;
+  @apply  !border-gray-200;
+}
+
+.ant-input-status-error {
+  @apply  !border-red-500;
+}
+
+//  Scrollbar
+ ::-webkit-scrollbar-corner { background: rgba(0,0,0,0.5); }
+ * {
+   scrollbar-width: thin;
+   scrollbar-color: #c5c5c5 #f6f6f6;
+ }
+ /* Works on Chrome, Edge, and Safari */
+ *::-webkit-scrollbar {
+   width: 12px;
+   height: 12px;
+ }
+ *::-webkit-scrollbar-track {
+   background: #f6f6f6;
+ }
+ *::-webkit-scrollbar-thumb {
+   background-color: #c5c5c5;
+   border-radius: 20px;
+   border: 3px solid #f6f6f6;
+ }
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+ }
+
+@media screen and (min-device-width: 1200px) and (max-device-width: 1600px) and (-webkit-min-device-pixel-ratio: 1) {
+  .ant-table-content {
+    overflow-x: scroll !important;
+  }
+
+  .ant-table table {
+    width: 90vw;
+  }
+}
+
+// @media all and (device-width: 768px) and (device-height: 1024px) and (orientation:portrait) {
+//   .ipad-portrait { color: red; } /* your css rules for ipad portrait */
+// }
+// @media all and (device-width: 1024px) and (device-height: 768px) and (orientation:landscape) {
+//   .ipad-landscape { color: blue; } /* your css rules for ipad landscape */
+// }
+//  tablet
+@media only screen and (min-width: 46.25em) and (max-width: 63.9375em) {
+  .ant-table-content {
+    overflow: scroll !important;
+    overflow-y: visible !important;
+  }
+
+  .ant-table table {
+    width: 900px;
+  }
+}
+
+//  Mobile
+@media only screen and (max-width: 46.1875em) {
+  .ant-table-content {
+    overflow: scroll !important;
+    overflow-y: visible !important;
+  }
+
+  .ant-table table {
+    width: 900px;
+  }
+}
+
+.ant-table-tbody tr td {
+  @apply  !bg-white;
+}
+
+// Tab
+.ant-tabs-tab {
+  .ant-tabs-tab-btn {
+    @apply text-gray-700;
+  }
+}
+
+.ant-tabs-tab-active {
+  .ant-tabs-tab-btn {
+    @apply  !text-rose-500;
+  }
+}
+
+.ant-tabs-ink-bar {
+  @apply  !bg-rose-500;
+}
+
+.ant-input-number-handler-wrap {
+  @apply  !hidden;
+}

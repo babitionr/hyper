@@ -1,0 +1,98 @@
+.table_add_invoice {
+
+  .product-price-table {
+
+    tbody tr:nth-child(2) td:nth-child(4) .remove {
+      display: none
+    }
+
+    .ant-table-thead tr th {
+      @apply  !bg-zinc-100;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+
+    .ant-input {
+      @apply rounded-sm bg-white;
+
+      &:hover {
+        @apply  !border-gray-200;
+      }
+    }
+
+    .editable-cell-value-wrap {
+      &:hover {
+        border-radius: 10px;
+      }
+
+      &:focus {
+        border-radius: 10px;
+      }
+    }
+
+    .discount-fixed {
+      .ant-input-number-input {
+        border: 1px solid #E5E7EB;
+        border-radius: 10px;
+        width: 181px;
+        height: 44px;
+        overflow: hidden;
+      }
+
+      .ant-input-number-handler-wrap {
+        display: none;
+      }
+    }
+
+    .ant-input-number {
+      border: 0;
+      border-radius: 10px;
+    }
+
+    .ant-input-number:focus,
+    .ant-input-number-focused {
+      border: 0;
+      box-shadow: none;
+      border-right-width: 0;
+      outline: 0;
+    }
+
+    .ant-table-placeholder {
+      display: none;
+    }
+
+    .ant-table-tbody>tr>td {
+      border-bottom: 1px solid #D1D5DB !important;
+    }
+
+    .ant-table-row-level-0 td:last-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    .percentInput {
+      .ant-input-number-input {
+        border: 1px solid #E5E7EB !important;
+        border-radius: 10px;
+        min-width: 100% !important;
+        height: 36px;
+        overflow: hidden;
+        width: 100% !important;
+      }
+
+      .ant-input-number-handler-wrap {
+        display: none;
+      }
+    }
+  }
+}
