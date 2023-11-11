@@ -85,14 +85,51 @@ const Page = () => {
 
   useEffect(() => {}, [tabName]);
 
+  const items = [
+    {
+      label: 'Xuất - nhập - tồn',
+      key: '1',
+      children: tabName === 'ExportImportExist' && <ExportImportExist />,
+    },
+    {
+      label: 'Nhập kho',
+      key: '2',
+      children: tabName === 'ImportStock' && <ImportStock />,
+    },
+    {
+      label: 'Xuất kho',
+      key: '3',
+      children: tabName === 'ExportStock' && <ExportStock />,
+    },
+    {
+      label: 'Yêu cầu vật tư',
+      key: '4',
+      children: tabName === 'MaterialRequirements' && <MaterialRequirements />,
+    },
+    {
+      label: 'Kiểm kho',
+      key: '5',
+      children: tabName === 'InventoryControl' && <InventoryControl />,
+    },
+    {
+      label: 'Lịch sử xuất - nhập',
+      key: '6',
+      children: tabName === 'ExportImportHistory' && <ImportExportHistory />,
+    },
+  ];
   return (
     <Fragment>
       <div className="min-h-screen">
         <div className="bg-white rounded-[10px] p-4 laboParameter">
           <h2 className="font-bold text-lg">{'Quản lý kho'.toUpperCase()}</h2>
           <div>
-            <Tabs defaultActiveKey={convertKeyTab} onTabClick={callbackTabClicked} activeKey={convertKeyTab(tabName)}>
-              <Tabs.TabPane tab="Xuất - nhập - tồn" key="1">
+            <Tabs
+              defaultActiveKey={convertKeyTab}
+              onTabClick={callbackTabClicked}
+              activeKey={convertKeyTab(tabName)}
+              items={items}
+            >
+              {/* <Tabs.TabPane tab="Xuất - nhập - tồn" key="1">
                 {tabName === 'ExportImportExist' && <ExportImportExist />}
               </Tabs.TabPane>
               <Tabs.TabPane tab="Nhập kho" key="2">
@@ -109,7 +146,7 @@ const Page = () => {
               </Tabs.TabPane>
               <Tabs.TabPane tab="Lịch sử xuất - nhập" key="6">
                 {tabName === 'ExportImportHistory' && <ImportExportHistory />}
-              </Tabs.TabPane>
+              </Tabs.TabPane> */}
             </Tabs>
           </div>
         </div>

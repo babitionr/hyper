@@ -1,9 +1,11 @@
 header {
   .ant-select:not(.ant-select-customize-input) {
-    .ant-select-selector{
+    .ant-select-selector {
       @apply bg-blue-500 border-blue-500 text-white rounded-full;
     }
-    .ant-select-arrow { @apply text-white; }
+    .ant-select-arrow {
+      @apply text-white;
+    }
   }
 }
 main {
@@ -42,7 +44,7 @@ main {
   }
 
   .line {
-    @apply bg-gray-500 block transition-all duration-300 ease-in-out rounded-sm h-1 ~"my-1.5" ;
+    @apply bg-gray-500 block transition-all duration-300 ease-in-out rounded-sm h-1 ~"my-1.5";
 
     &:nth-child(1),
     &:nth-child(2) {
@@ -58,35 +60,34 @@ main {
   }
 }
 
-
-.ant-form-item-control-input-content{
-  input{
+.ant-form-item-control-input-content {
+  input {
     @apply bg-white;
   }
-  input:disabled{
+  input:disabled {
     @apply !bg-gray-100;
   }
-  .ant-select-selector{
+  .ant-select-selector {
     @apply bg-white;
   }
-  .ant-select-selector:disabled{
+  .ant-select-selector:disabled {
     @apply !bg-gray-100;
   }
 }
 
 //Table
-.ant-table-thead{
-  .ant-table-cell{
+.ant-table-thead {
+  .ant-table-cell {
     @apply border-0;
   }
-  .ant-table-cell::before{
+  .ant-table-cell::before {
     @apply hidden;
   }
-  tr{
-    th{
+  tr {
+    th {
       @apply !bg-zinc-100;
-      .ant-dropdown-trigger{
-        @apply hidden;
+      .ant-dropdown-trigger {
+        @apply hidden bg-red-500;
       }
       .ant-table-column-sorter {
         @apply hidden;
@@ -94,8 +95,8 @@ main {
     }
   }
 }
-#avatar{
-  img{
+#avatar {
+  img {
     @apply !rounded-full block w-full h-full;
   }
 }

@@ -202,6 +202,58 @@ function Page() {
     }
     return Math.abs(a - b);
   };
+
+  const items = [
+    {
+      label: 'Chi tiết kiểm kho',
+      key: '1',
+      children:
+        billType === 'MANUAL' ? (
+          <>
+            {data?.status === 'COMPLETED' || +step === 3 ? (
+              <TableDetailInventoryControl
+                dataSource={dataSource}
+                setDataSource={setDataSource}
+                pageType="create"
+                status={data?.status}
+              />
+            ) : (
+              <TableWarehousingProduct
+                warehousingProductDtoList={dataSource}
+                setWarehousingProductDtoList={setDataSource}
+              />
+            )}
+          </>
+        ) : (
+          <TableDetailInventoryControl
+            dataSource={dataSource.map((i, idx) => ({ ...i, key: idx }))}
+            setDataSource={setDataSource}
+            pageType="create"
+            status={data?.status}
+          />
+        ),
+    },
+    {
+      label: 'Kết quả điều chỉnh',
+      key: '2',
+      children:
+        data?.status === 'COMPLETED' ? (
+          <TableDetailInventoryControl
+            dataSource={dataSource
+              ?.filter((i) => i?.stockQuantity !== i?.realStockQuantity)
+              ?.map((i) => ({
+                ...i,
+                amountOfDifference: calculatorAmount(i?.stockQuantity, i?.realStockQuantity),
+              }))}
+            setDataSource={setDataSource}
+            pageType="create"
+            status={data?.status}
+            type={type}
+          />
+        ) : null,
+    },
+  ];
+
   return (
     <div className="min-h-screen">
       <div className="bg-white p-4 rounded-lg inventoryControl">
@@ -348,8 +400,8 @@ function Page() {
                 </div>
                 {(step === 2 || step === 3) && (
                   <div className="p-4 border border-gray-300 rounded-lg">
-                    <Tabs defaultActiveKey={1} onTabClick={(e) => setType(e)}>
-                      <Tabs.TabPane tab="Chi tiết kiểm kho" key="1">
+                    <Tabs defaultActiveKey={1} onTabClick={(e) => setType(e)} items={items}>
+                      {/* <Tabs.TabPane tab="Chi tiết kiểm kho" key="1">
                         {billType === 'MANUAL' ? (
                           <>
                             {data?.status === 'COMPLETED' || +step === 3 ? (
@@ -390,7 +442,7 @@ function Page() {
                             type={type}
                           />
                         </Tabs.TabPane>
-                      ) : null}
+                      ) : null} */}
                     </Tabs>
                   </div>
                 )}

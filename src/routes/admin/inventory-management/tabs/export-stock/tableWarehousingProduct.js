@@ -287,6 +287,17 @@ export const TableWarehousingProduct = ({ warehousingProductDtoList, setWarehous
     return { data, count: data.length };
   };
 
+  const items = [
+    {
+      label: 'Vật tư',
+      key: '1',
+    },
+    {
+      label: 'Thuốc',
+      key: '2',
+    },
+  ];
+
   const [handleChangeGetAllMaterialMedicine, DataTableMaterialMedicine] = HookDataTable({
     showPagination: false,
     loadFirst: false,
@@ -296,6 +307,7 @@ export const TableWarehousingProduct = ({ warehousingProductDtoList, setWarehous
     newRowHeader: (
       <div className="w-full">
         <Tabs
+          items={items}
           className="tabMaterialMedicine"
           defaultActiveKey={1}
           onTabClick={(e) => {
@@ -307,8 +319,8 @@ export const TableWarehousingProduct = ({ warehousingProductDtoList, setWarehous
             }
           }}
         >
-          <Tabs.TabPane tab="Vật tư" key="1" size={'large'} className=""></Tabs.TabPane>
-          <Tabs.TabPane tab="Thuốc" key="2" size={'large'} className=""></Tabs.TabPane>
+          {/* <Tabs.TabPane tab="Vật tư" key="1" size={'large'} className=""></Tabs.TabPane>
+          <Tabs.TabPane tab="Thuốc" key="2" size={'large'} className=""></Tabs.TabPane> */}
         </Tabs>
       </div>
     ),

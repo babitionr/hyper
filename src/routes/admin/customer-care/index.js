@@ -18,12 +18,39 @@ const Page = ({ type }) => {
     return navigate(routerLinks('CustomerCare') + `?tab=${key}`);
   };
 
+  const items = [
+    {
+      label: 'Nhắc lịch hẹn',
+      key: 'remindCalendar',
+      children: <RemindCalendar />,
+    },
+    {
+      label: 'Sau điều trị',
+      key: 'afterTreatment',
+      children: <AfterTreatment />,
+    },
+    {
+      label: 'Sinh nhật',
+      key: 'birthday',
+      children: <Birthday />,
+    },
+    {
+      label: 'Trễ hẹn',
+      key: 'lateCalendar',
+      children: <LateCalendar />,
+    },
+    {
+      label: 'Khách hàng tiềm năng',
+      key: 'potential',
+      children: <Potential />,
+    },
+  ];
   return (
     <div className="min-h-screen">
       <div className="bg-white p-4 rounded-lg pb-6">
         <h2 className="font-bold text-lg text-zinc-600">{'Chăm sóc khách hàng'.toUpperCase()}</h2>
-        <Tabs onChange={handleChangeTab} activeKey={String(tabName)}>
-          <Tabs.TabPane tab="Nhắc lịch hẹn" key="remindCalendar">
+        <Tabs onChange={handleChangeTab} activeKey={String(tabName)} items={items}>
+          {/* <Tabs.TabPane tab="Nhắc lịch hẹn" key="remindCalendar">
             <RemindCalendar />
           </Tabs.TabPane>
           <Tabs.TabPane tab="Sau điều trị" key="afterTreatment">
@@ -37,7 +64,7 @@ const Page = ({ type }) => {
           </Tabs.TabPane>
           <Tabs.TabPane tab="Khách hàng tiềm năng" key="potential">
             <Potential />
-          </Tabs.TabPane>
+          </Tabs.TabPane> */}
         </Tabs>
       </div>
     </div>

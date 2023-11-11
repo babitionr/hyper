@@ -19,7 +19,7 @@ function ReportDate({ type }) {
       const res = await ReportService.getDataRevenue({ branchUuid, date: filterDate });
       setDataRevenue(res.data);
     } catch (error) {
-      console.log('error: ', error);
+      // console.log('error: ', error);
     }
   };
 
@@ -27,9 +27,9 @@ function ReportDate({ type }) {
     try {
       const res = await ReportService.getReceiptList({ branchUuid, date: filterDate });
       setListRecept(res.data ?? []);
-      console.log(res?.data);
+      // console.log(res?.data);
     } catch (error) {
-      console.log('error: ', error);
+      // console.log('error: ', error);
     }
   };
 
@@ -38,7 +38,7 @@ function ReportDate({ type }) {
       const res = await ReportService.getListExpenseRevenue({ branchUuid, date: filterDate });
       setListExpenseRevenue(res.data ?? []);
     } catch (error) {
-      console.log('error: ', error);
+      // console.log('error: ', error);
     }
   };
   const location = useLocation();

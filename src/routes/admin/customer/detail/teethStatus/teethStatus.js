@@ -199,12 +199,848 @@ export const TeethStatus = (props) => {
       ? setSelectTeethList([...selectTeethList].filter((ele) => ele !== teeth?.uuid))
       : setSelectTeethList([...selectTeethList, teeth?.uuid]);
   };
+
+  const items = [
+    {
+      label: 'Răng vĩnh viễn',
+      key: '1',
+      children: (
+        <>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 8 }, (_, i) => i + 11)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className={classNames({ 'hidden xl:block': [11, 12, 13].includes(ele) })} key={ele}>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                    <button
+                      onClick={() => handleSelectTeethHistoryList(teeth)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeethList.find((ele) => ele === teeth?.uuid) },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 8 }, (_, i) => i + 21).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className={classNames({ 'hidden xl:block': [26, 27, 28].includes(ele) })} key={ele}>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                  <button
+                    onClick={() => handleSelectTeethHistoryList(teeth)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeethList.find((ele) => ele === teeth?.uuid) },
+                    )}
+                  >
+                    {' '}
+                    {ele}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 3 }, (_, i) => i + 11)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className="block xl:hidden" key={ele}>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                    <button
+                      onClick={() => handleSelectTeethHistoryList(teeth)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 3 }, (_, i) => i + 26).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className="block xl:hidden" key={ele}>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                  <button
+                    onClick={() => handleSelectTeethHistoryList(teeth)}
+                    key={ele}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {ele}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 8 }, (_, i) => i + 41)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className={classNames({ 'hidden xl:block': [41, 42, 43].includes(ele) })} key={ele}>
+                    <button
+                      onClick={() => handleSelectTeethHistoryList(teeth)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeethList.find((ele) => ele === teeth?.uuid) },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 8 }, (_, i) => i + 31).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className={classNames({ 'hidden xl:block': [36, 37, 38].includes(ele) })} key={ele}>
+                  <button
+                    onClick={() => handleSelectTeethHistoryList(teeth)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeethList.find((ele) => ele === teeth?.uuid) },
+                    )}
+                  >
+                    {' '}
+                    {ele}
+                  </button>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 3 }, (_, i) => i + 41)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className="block xl:hidden" key={ele}>
+                    <button
+                      onClick={() => handleSelectTeethHistoryList(teeth)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 3 }, (_, i) => i + 36).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className="block xl:hidden" key={ele}>
+                  <button
+                    onClick={() => handleSelectTeethHistoryList(teeth)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {ele}
+                  </button>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      ),
+    },
+    {
+      label: 'Răng sữa',
+      key: '2',
+      children: (
+        <>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 8 }, (_, i) => i + 11)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className={classNames({ 'hidden xl:block': [11, 12, 13].includes(ele) })} key={ele}>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                    <button
+                      onClick={() => handleSelectTeethHistoryList(teeth)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeethList.find((ele) => ele === teeth?.uuid) },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 8 }, (_, i) => i + 21).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className={classNames({ 'hidden xl:block': [26, 27, 28].includes(ele) })} key={ele}>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                  <button
+                    onClick={() => handleSelectTeethHistoryList(teeth)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeethList.find((ele) => ele === teeth?.uuid) },
+                    )}
+                  >
+                    {' '}
+                    {ele}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 3 }, (_, i) => i + 11)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className="block xl:hidden" key={ele}>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                    <button
+                      onClick={() => handleSelectTeethHistoryList(teeth)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 3 }, (_, i) => i + 26).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className="block xl:hidden" key={ele}>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                  <button
+                    onClick={() => handleSelectTeethHistoryList(teeth)}
+                    key={ele}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {ele}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 8 }, (_, i) => i + 41)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className={classNames({ 'hidden xl:block': [41, 42, 43].includes(ele) })} key={ele}>
+                    <button
+                      onClick={() => handleSelectTeethHistoryList(teeth)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeethList.find((ele) => ele === teeth?.uuid) },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 8 }, (_, i) => i + 31).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className={classNames({ 'hidden xl:block': [36, 37, 38].includes(ele) })} key={ele}>
+                  <button
+                    onClick={() => handleSelectTeethHistoryList(teeth)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeethList.find((ele) => ele === teeth?.uuid) },
+                    )}
+                  >
+                    {' '}
+                    {ele}
+                  </button>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 3 }, (_, i) => i + 41)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className="block xl:hidden" key={ele}>
+                    <button
+                      onClick={() => handleSelectTeethHistoryList(teeth)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 3 }, (_, i) => i + 36).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className="block xl:hidden" key={ele}>
+                  <button
+                    onClick={() => handleSelectTeethHistoryList(teeth)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {ele}
+                  </button>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      ),
+    },
+  ];
+  const item1s = [
+    {
+      label: 'Răng vĩnh viễn',
+      key: '1',
+      children: (
+        <>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 8 }, (_, i) => i + 11)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className={classNames({ 'hidden xl:block': [11, 12, 13].includes(ele) })} key={ele}>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                    <button
+                      onClick={() => handleSelectTeeth(teeth?.uuid)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 8 }, (_, i) => i + 21).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className={classNames({ 'hidden xl:block': [26, 27, 28].includes(ele) })} key={ele}>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                  <button
+                    onClick={() => handleSelectTeeth(teeth?.uuid)}
+                    key={ele}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {ele}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 3 }, (_, i) => i + 11)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className="block xl:hidden" key={ele}>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                    <button
+                      onClick={() => handleSelectTeeth(teeth?.uuid)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 3 }, (_, i) => i + 26).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className="block xl:hidden" key={ele}>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                  <button
+                    onClick={() => handleSelectTeeth(teeth?.uuid)}
+                    key={ele}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {ele}
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 8 }, (_, i) => i + 41)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className={classNames({ 'hidden xl:block': [43, 42, 41].includes(ele) })} key={ele}>
+                    <button
+                      onClick={() => handleSelectTeeth(teeth?.uuid)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                    <div className="h-14 relative flex justify-center align-top mt-4">
+                      <img className="absolute top-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 8 }, (_, i) => i + 31).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className={classNames({ 'hidden xl:block': [36, 37, 38].includes(ele) })} key={ele}>
+                  <button
+                    onClick={() => handleSelectTeeth(teeth?.uuid)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {' '}
+                    {ele}
+                  </button>
+                  <div className="h-14 relative flex justify-center align-top mt-4">
+                    <img className="absolute top-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <div className="flex justify-center gap-3">
+            {Array.from({ length: 3 }, (_, i) => i + 41)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div className="block xl:hidden" key={ele}>
+                    <button
+                      onClick={() => handleSelectTeeth(teeth?.uuid)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 3 }, (_, i) => i + 36).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div className="block xl:hidden" key={ele}>
+                  <button
+                    onClick={() => handleSelectTeeth(teeth?.uuid)}
+                    key={ele}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {ele}
+                  </button>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      ),
+    },
+    {
+      label: 'Răng vĩnh viễn',
+      key: '1',
+      children: (
+        <>
+          <div className="flex justify-center gap-3">
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            {Array.from({ length: 5 }, (_, i) => i + 51)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div key={ele}>
+                    <div className="h-14 relative flex justify-center align-bottom mb-4">
+                      <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                    <button
+                      onClick={() => handleSelectTeeth(teeth?.uuid)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teethPosition.find(
+                            (element) => Number(element.teethNumber) === ele,
+                          ),
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 5 }, (_, i) => i + 61).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div key={ele}>
+                  <div className="h-14 relative flex justify-center align-bottom mb-4">
+                    <img className="absolute bottom-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                  <button
+                    onClick={() => handleSelectTeeth(teeth?.uuid)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teethPosition.find(
+                          (element) => Number(element.teethNumber) === ele,
+                        ),
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {' '}
+                    {ele}
+                  </button>
+                </div>
+              );
+            })}
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+          </div>
+          <div className="flex justify-center gap-3">
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            {Array.from({ length: 5 }, (_, i) => i + 81)
+              .reverse()
+              .map((ele) => {
+                const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+                return (
+                  <div key={ele}>
+                    <button
+                      onClick={() => handleSelectTeeth(teeth?.uuid)}
+                      className={classNames(
+                        'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                        {
+                          '!opacity-100 !cursor-pointer': teeth,
+                        },
+                        { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                      )}
+                    >
+                      {' '}
+                      {ele}
+                    </button>
+                    <div className="h-14 relative flex justify-center align-top mt-4">
+                      <img className="absolute top-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                    </div>
+                  </div>
+                );
+              })}
+            {Array.from({ length: 5 }, (_, i) => i + 71).map((ele) => {
+              const teeth = teethPosition.find((element) => Number(element.teethNumber) === ele);
+              return (
+                <div key={ele}>
+                  <button
+                    onClick={() => handleSelectTeeth(teeth?.uuid)}
+                    className={classNames(
+                      'border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default',
+                      {
+                        '!opacity-100 !cursor-pointer': teeth,
+                      },
+                      { 'bg-red-500 text-white': selectTeeth === teeth?.uuid },
+                    )}
+                  >
+                    {' '}
+                    {ele}
+                  </button>
+                  <div className="h-14 relative flex justify-center align-top mt-4">
+                    <img className="absolute top-0 " src={require(`assets/images/teeth/${ele}.png`)} />
+                  </div>
+                </div>
+              );
+            })}
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+            <button className="border rounded text-sm font-normal py-3 px-2.5 w-10 opacity-0 cursor-default">
+              {' '}
+              00{' '}
+            </button>
+          </div>
+        </>
+      ),
+    },
+  ];
+
   return (
     <div>
       <div className="text-lg font-bold">{'Danh sách tiểu sử răng'.toUpperCase()}</div>
       <div className="mt-4 mb-6 flex flex-col gap-4">
-        <Tabs defaultActiveKey={1}>
-          <Tabs.TabPane tab="Răng vĩnh viễn" key="1" className="flex flex-col gap-4">
+        <Tabs defaultActiveKey={1} items={item1s}>
+          {/* <Tabs.TabPane tab="Răng vĩnh viễn" key="1" className="flex flex-col gap-4">
             <div className="flex justify-center gap-3">
               {Array.from({ length: 8 }, (_, i) => i + 11)
                 .reverse()
@@ -575,7 +1411,7 @@ export const TeethStatus = (props) => {
                 00{' '}
               </button>
             </div>
-          </Tabs.TabPane>
+          </Tabs.TabPane> */}
         </Tabs>
       </div>
 
@@ -669,7 +1505,7 @@ export const TeethStatus = (props) => {
                 </button>
               </div>
             }
-            visible={showModal}
+            open={showModal}
             footer={null}
             className="!w-7/12 min-w-min pb-0"
             closable={false}
@@ -727,8 +1563,8 @@ export const TeethStatus = (props) => {
                   <div>
                     <div>Sơ đồ vị trí răng</div>
                     <div className=" mb-6 flex flex-col gap-4 w-full">
-                      <Tabs defaultActiveKey={1} className="customer-detail">
-                        <Tabs.TabPane tab="Răng vĩnh viễn" key="1" className="flex flex-col gap-4">
+                      <Tabs defaultActiveKey={1} items={items} className="customer-detail">
+                        {/* <Tabs.TabPane tab="Răng vĩnh viễn" key="1" className="flex flex-col gap-4">
                           <div className="flex justify-center gap-3">
                             {Array.from({ length: 8 }, (_, i) => i + 11)
                               .reverse()
@@ -1092,7 +1928,7 @@ export const TeethStatus = (props) => {
                               );
                             })}
                           </div>
-                        </Tabs.TabPane>
+                        </Tabs.TabPane> */}
                       </Tabs>
                     </div>
                   </div>

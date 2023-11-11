@@ -28,31 +28,47 @@ const Layout = ({ children }) => {
   const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1025);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
 
-  const menuss = (
-    <MenuAnt
-      items={listBrand?.map((i) => ({
-        key: i.uuid,
-        label: i.branchName,
-      }))}
-      onClick={(e) => {
-        if (e.key === localStorage.getItem('branchUuid')) {
-          return false;
-        }
-        setCurrBrand(e.domEvent.target.textContent);
-        setBranchUuid(e.key);
-        // if (window.location.hash.substr(1) === routerLinks('Report')) {
-        //   navigate(routerLinks('Report'), { replace: true })
-        //   window.location.reload()
-        // } else {
-        //   navigate(routerLinks('Home'), { replace: true })
-        //   window.location.reload()
-        // }
-        window.location.reload();
-      }}
-      selectedKeys={localStorage.getItem('branchUuid')}
-    />
-  );
+  // const menuss = (
+  //   <MenuAnt
+  //     items={listBrand?.map((i) => ({
+  //       key: i.uuid,
+  //       label: i.branchName,
+  //     }))}
+  //     onClick={(e) => {
+  //       if (e.key === localStorage.getItem('branchUuid')) {
+  //         return false;
+  //       }
+  //       setCurrBrand(e.domEvent.target.textContent);
+  //       setBranchUuid(e.key);
+  //       window.location.reload();
+  //     }}
+  //     selectedKeys={localStorage.getItem('branchUuid')}
+  //   />
+  // );
+  const a = listBrand?.map((i) => ({
+    key: i.uuid,
+    label: (
+      <div
+        onClick={(e) => {
+          console.log(e.key);
+          if (e.key === localStorage.getItem('branchUuid')) {
+            return false;
+          }
+          setCurrBrand(e.domEvent.target.textContent);
+          setBranchUuid(e.key);
+          window.location.reload();
+        }}
+        selectedKeys={localStorage.getItem('branchUuid')}
+      >
+        {i.branchName}
+      </div>
+    ),
+  }));
+  const menu2 = {
+    items: a,
+  };
 
+  // console.log(menu2);
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -97,6 +113,33 @@ const Layout = ({ children }) => {
   // useEffect(() => {
   //   getNotifiList();
   // }, []);
+  const menuNav = {
+    items: [
+      {
+        label: (
+          <li
+            className="p-2 hover:bg-gray-100 flex items-center pl-4  border border-b-0 cursor-pointer border-gray-200"
+            onClick={() => navigate(routerLinks('Profile') + `?tab=2`)}
+          >
+            <i className="las la-key text-lg mr-2"></i> Đổi mật khẩu
+          </li>
+        ),
+        key: '1',
+      },
+      {
+        label: (
+          <li
+            className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer border  border-solid border-gray-200"
+            onClick={() => navigate(routerLinks('Login'), { replace: true })}
+          >
+            <i className="las la-sign-out-alt text-lg mr-2"></i> Đăng xuất
+          </li>
+        ),
+        key: '2',
+      },
+    ],
+  };
+  console.log(currBrand);
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
@@ -127,11 +170,11 @@ const Layout = ({ children }) => {
         </div>
 
         <div className="flex items-center justify-end px-5 h-16">
-          <div className="flex items-center">
-            <div className="mr-3">
+          <div className="flex items-center ">
+            <div className="mr-3 ">
               {/* <Dropdown
                 menu={
-                  listBrand.map((i, index) => ({ key: index, label: i.branchName }))
+                  
                 }
                 trigger={['click']}
               >
@@ -140,20 +183,13 @@ const Layout = ({ children }) => {
                 </a>
               </Dropdown> */}
               <div className="flex items-center">
-                <span className="mr-1">{exportIcons('MAP')}</span>
-                <Dropdown menu={menuss} trigger={['click']} onMouseEnter={() => getBrand()}>
-                  <a
-                    onClick={(e) => {
-                      e.preventDefault();
-                    }}
-                  >
-                    {currBrand}
-                    <i className="ml-1 las la-angle-down"></i>
-                  </a>
+                <span className="mr-1 ">{exportIcons('MAP')}</span>
+                <Dropdown menu={menu2} trigger={['click']}>
+                  <div>123</div>
                 </Dropdown>
               </div>
             </div>
-            <NotificationMenu />
+            <NotificationMenu className="w-3 h-3 cursor-pointer" />
             {/* <div className="mr-5 relative flex group">
               <div className="rounded-full text-white w-5 h-5 bg-red-500 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
                 1
@@ -186,61 +222,29 @@ const Layout = ({ children }) => {
               </section>
             </Dropdown> */}
             <Dropdown
+              className="bg-white"
               trigger={['click', 'hover']}
-              menu={
-                <ul className="bg-white">
-                  {/* <li
-                    className="p-2 flex items-center pl-4 cursor-pointer border-b border-solid border-gray-200"
-                    style={{
-                      wordBreak: 'break-word',
-                    }}
-                  >
-                    <img
-                      className="w-[35px] h-[35px] rounded-full object-cover mr-2"
-                      src={data?.profileImage || avatar}
-                      alt="profile_pic"
-                    ></img>
-                    <div>
-                      <h1 className="font-bold text-sm">{data?.name}</h1>
-                      <p className="text-[0.6rem]">{data?.email}</p>
-                    </div>
-                  </li> */}
-                  {/* <li
-                    className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer"
-                    onClick={() => navigate(routerLinks('Profile'))}
-                  >
-                    <i className="las la-user text-lg mr-2"></i> Thông tin cá nhân
-                  </li> */}
-                  <li
-                    className="p-2 hover:bg-gray-100 flex items-center pl-4  border border-b-0 cursor-pointer border-gray-200"
-                    onClick={() => navigate(routerLinks('Profile') + `?tab=2`)}
-                  >
-                    <i className="las la-key text-lg mr-2"></i> Đổi mật khẩu
-                  </li>
-                  <li
-                    className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer border  border-solid border-gray-200"
-                    onClick={() => navigate(routerLinks('Login'), { replace: true })}
-                  >
-                    <i className="las la-sign-out-alt text-lg mr-2"></i> Đăng xuất
-                  </li>
-                </ul>
-              }
+              // menu={
+              //   <ul className="bg-white">
+              //     <li
+              //       className="p-2 hover:bg-gray-100 flex items-center pl-4  border border-b-0 cursor-pointer border-gray-200"
+              //       onClick={() => navigate(routerLinks('Profile') + `?tab=2`)}
+              //     >
+              //       <i className="las la-key text-lg mr-2"></i> Đổi mật khẩu
+              //     </li>
+              //     <li
+              //       className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer border  border-solid border-gray-200"
+              //       onClick={() => navigate(routerLinks('Login'), { replace: true })}
+              //     >
+              //       <i className="las la-sign-out-alt text-lg mr-2"></i> Đăng xuất
+              //     </li>
+              //   </ul>
+              // }
+              menu={menuNav}
               placement="bottomRight"
-              overlayClassName="rounded-md shadow-md w-[210px]  overflow-hidden"
             >
-              {/* <section className="flex items-center" id={'dropdown-profile'}>
-                {data?.profileImage ? (
-                  <img
-                    className="w-[35px] h-[35px] rounded-full object-cover mr-2"
-                    src={data?.profileImage}
-                    alt="profile_pic"
-                  ></img>
-                ) : ( */}
-              {/* <Avatar src={avatar} size={50} /> */}
-              {/* )} */}
-              {/* </section> */}
-              <section className="flex items-center cursor-pointer" id={'dropdown-profile'}>
-                <Avatar size={44} src={avatar} id="avatar" />
+              <section className="flex items-center" id={'dropdown-profile'}>
+                <Avatar size={40} src={avatar} id="avatar" />
               </section>
             </Dropdown>
           </div>
