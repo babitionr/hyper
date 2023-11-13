@@ -39,29 +39,35 @@ const Layout = ({ children }) => {
   useEffect(() => {
     getBrand();
   }, []);
-  const a = listBrand?.map((i) => ({
-    key: i.uuid,
-    label: (
-      <div
-        onClick={(e) => {
-          console.log(e.key);
-          if (e.key === localStorage.getItem('branchUuid')) {
-            return false;
-          }
-          setCurrBrand(e.domEvent.target.textContent);
-          setBranchUuid(e.key);
-          window.location.reload();
-        }}
-      >
-        {i.branchName}
-      </div>
-    ),
-  }));
-  const menu2 = {
-    items: a,
+
+  const handleMenuClick = (e, key) => {
+    if (e.target) {
+      if (key === localStorage.getItem('branchUuid')) {
+        return false;
+      }
+      setCurrBrand(e.target.textContent);
+      // setCurrBrand(e.domEvent.target.textContent);
+      // setBranchUuid(e.key);
+      setBranchUuid(key);
+      window.location.reload();
+    }
   };
 
-  // console.log(menu2);
+  const menuBrand = {
+    items: listBrand?.map((i) => ({
+      key: i.uuid,
+      label: (
+        <div
+          onClick={(e) => {
+            handleMenuClick(e, i.uuid);
+          }}
+        >
+          {i.branchName}
+        </div>
+      ),
+    })),
+  };
+
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -141,8 +147,9 @@ const Layout = ({ children }) => {
             <div className="mr-3 ">
               <div className="flex items-center">
                 <span className="mr-1 ">{exportIcons('MAP')}</span>
-                <Dropdown menu={menu2} trigger={['click']} onMouseEnter={() => getBrand()}>
+                <Dropdown menu={menuBrand} trigger={['click']}>
                   <a
+                    className="hover:text-blue-500 cursor-pointer "
                     onClick={(e) => {
                       e.preventDefault();
                     }}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { DatePicker, Form, Select } from 'antd';
-
+import { DatePicker, Form, Select, ConfigProvider } from 'antd';
+import locale from 'antd/es/date-picker/locale/vi_VN';
+import 'dayjs/locale/vi';
 const { Option } = Select;
 const dateOnChange = (date, dateString) => {
   console.log(date, dateString);
@@ -28,46 +29,54 @@ export const FilterTable = (props) => {
       className="border rounded-lg"
     >
       <div className="flex flex-col gap-4 p-4">
-        <div className="flex w-full gap-8">
-          <Form.Item name="appointmentDate" className="w-1/3" label="Lịch hẹn">
-            <DatePicker
-              placeholder="DD/MM/YYYY"
-              className="!w-full border rounded-lg !bg-white border-gray-200"
-              onChange={dateOnChange}
-              format="DD/MM/YYYY"
-            />
-          </Form.Item>
-          <Form.Item name="treatmentStatus" className="w-1/3" label="Tình trạng điều trị">
-            <Select className="!w-full !rounded-lg" placeholder="Tình trạng điều trị" allowClear>
+        <div className="flex w-full gap-8 mb-4">
+          <div className="w-full">
+            <ConfigProvider locale={locale}>
+              <Form.Item name="appointmentDate" className="w-1/3 custom1 !m-0" label="Lịch hẹn"></Form.Item>
+              <DatePicker
+                placeholder="DD/MM/YYYY"
+                className="!w-full border rounded-lg !bg-white border-gray-200 custom1"
+                onChange={dateOnChange}
+                format="DD/MM/YYYY"
+                locale={locale}
+              />
+            </ConfigProvider>
+          </div>
+          <div className="w-full">
+            <Form.Item name="treatmentStatus" className="w-1/3 custom1 !m-0" label="Tình trạng điều trị"></Form.Item>
+            <Select className="!w-full !rounded-lg custom1" placeholder="Tình trạng điều trị" allowClear>
               <Option value="TREATED">Đã điều trị</Option>
               <Option value="NOT_TREAT">Chưa điều trị</Option>
               <Option value="TREATING">Đang điều trị</Option>
             </Select>
-          </Form.Item>
-          <Form.Item name="bacSiDieuTri" className="w-1/3" label="Bác sĩ điều trị">
-            <Select className="!w-full !rounded-lg " placeholder="Bác sĩ điều trị" allowClear>
+          </div>
+          <div className="w-full">
+            <Form.Item name="bacSiDieuTri" className="w-1/3 custom1 !m-0" label="Bác sĩ điều trị"></Form.Item>
+            <Select className="!w-full !rounded-lg custom1" placeholder="Bác sĩ điều trị" allowClear>
               <Option value="jack">Jack</Option>
               <Option value="lucy">Lucy</Option>
               <Option value="Yiminghe">yiminghe</Option>
             </Select>
-          </Form.Item>
+          </div>
         </div>
         <div className="flex w-full gap-8">
-          <Form.Item name="customerResource" className="w-1/3" label="Nguồn khách hàng">
-            <Select className="!w-full !rounded-lg " placeholder="Nguồn khách hàng" allowClear>
+          <div className="w-1/3 custom1">
+            <Form.Item name="customerResource" className="w-1/3 custom1 !m-0" label="Nguồn khách hàng"></Form.Item>
+            <Select className="!w-full !rounded-lg custom1" placeholder="Nguồn khách hàng" allowClear>
               <Option value="FACEBOOK">FACEBOOK</Option>
               <Option value="ZALO">ZALO</Option>
               <Option value="WEBSITE">WEBSITE</Option>
             </Select>
-          </Form.Item>
-          <Form.Item name="treatmentDate" className="w-1/3" label="Ngày khám">
+          </div>
+          <div className="w-1/3 custom1">
+            <Form.Item name="treatmentDate" className="w-1/3 custom1 !m-0" label="Ngày khám"></Form.Item>
             <DatePicker
               placeholder="DD/MM/YYYY"
-              className="!w-full border rounded-lg !bg-white border-gray-200"
+              className="!w-full border rounded-lg !bg-white border-gray-200 custom1"
               onChange={dateOnChange}
               format="DD/MM/YYYY"
             />
-          </Form.Item>
+          </div>
           <div className="w-1/3"></div>
         </div>
       </div>

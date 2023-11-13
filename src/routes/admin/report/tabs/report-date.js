@@ -4,12 +4,12 @@ import { exportIcons, formatCurrency, routerLinks } from 'utils';
 import { DoctorIncomeChart } from '../components/DoctorIncome';
 import { useLocation, useNavigate } from 'react-router';
 import { ReportService } from 'services/report';
-import moment from 'moment';
+import daysjs from 'dayjs';
 
 function ReportDate({ type }) {
   const navigate = useNavigate();
   const branchUuid = localStorage.getItem('branchUuid');
-  const [filterDate, setFilterDate] = useState(moment().format('YYYY-MM-DD 00:00:00'));
+  const [filterDate, setFilterDate] = useState(daysjs().format('YYYY-MM-DD 00:00:00'));
   const [dataRevenue, setDataRevenue] = useState();
   const [listRecept, setListRecept] = useState([]);
   const [listExpenseRevenue, setListExpenseRevenue] = useState([]);
@@ -55,12 +55,12 @@ function ReportDate({ type }) {
         allowClear={false}
         format={'DD/MM/YYYY'}
         className="w-full sm:w-[245px] mb-4 label-1 !bg-white"
-        defaultValue={moment()}
+        defaultValue={daysjs()}
         onChange={(value) => {
           if (!value) {
             setFilterDate('');
           }
-          setFilterDate(moment(value).format('YYYY-MM-DD 00:00:00'));
+          setFilterDate(daysjs(value).format('YYYY-MM-DD 00:00:00'));
         }}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 max-sm:grid-cols-1 max-sm:gap-y-4 mb-4">

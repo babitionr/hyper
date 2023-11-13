@@ -374,7 +374,7 @@ const NotificationMenu = ({ getNotifiList }) => {
           {/* <div className="rounded-full text-white w-5 h-5 bg-red-500 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
             11
           </div> */}
-          <Avatar className="las la-bell text-2xl text-gray-500" />
+          <Avatar className="las la-bell text-4xl bg-transparent text-gray-500 w-auto h-auto" />
           {notiList.filter((item) => !item.isRead).length ? (
             <Badge
               count={notiList.filter((item) => !item.isRead).length}

@@ -109,7 +109,7 @@ function RevenueOverview() {
         <DatePicker.RangePicker
           allowClear={false}
           value={[dayjs(filter.fromDate), dayjs(filter.toDate)]}
-          className="w-full sm:w-[300px] h-[42px] !bg-white"
+          className="w-full sm:w-[300px] h-[42px] !bg-white label-1"
           format={'DD/MM/YYYY'}
           onChange={(date) => {
             if (!date) {
@@ -128,7 +128,7 @@ function RevenueOverview() {
           }}
         />
       </div>
-      <div className="grid grid-cols-2 items-start gap-4">
+      <div className="grid grid-cols-2 items-start gap- label-1">
         <div className="rounded-xl border border-gray-200">
           <div className="py-6 px-10 border-b border-gray-200 mb-4">
             {' '}
