@@ -54,7 +54,7 @@ function ReportDate({ type }) {
       <DatePicker
         allowClear={false}
         format={'DD/MM/YYYY'}
-        className="w-full sm:w-[245px] mb-4 !bg-white"
+        className="w-full sm:w-[245px] mb-4 label-1 !bg-white"
         defaultValue={moment()}
         onChange={(value) => {
           if (!value) {
@@ -111,10 +111,10 @@ function ReportDate({ type }) {
             <h1 className="text-4xl text-[#0B1354] mb-3 font-bold">
               {formatCurrency(dataRevenue?.receiptAmount ?? 0, ' VND')}
             </h1>
-            <p className="text-gray-2">Tổng thu</p>
+            <p className="text-gray-2 label-1">Tổng thu</p>
           </div>
           <div
-            className="text-blue-600 underline text-base cursor-pointer"
+            className="text-blue-600 underline text-base cursor-pointer label-1"
             onClick={() =>
               navigate(routerLinks('ReportDateDetail') + `?type=receipt`, { state: { dateFilter: filterDate } })
             }
@@ -132,10 +132,10 @@ function ReportDate({ type }) {
             <h1 className="text-4xl text-[#0B1354] mb-3 font-bold">
               {formatCurrency(dataRevenue?.paidAmount ?? 0, ' VND')}
             </h1>
-            <p className="text-gray-2">Tổng chi</p>
+            <p className="text-gray-2 label-1">Tổng chi</p>
           </div>
           <div
-            className="text-blue-600 underline text-base cursor-pointer"
+            className="text-blue-600 underline text-base cursor-pointer label-1"
             onClick={() =>
               navigate(routerLinks('ReportDateDetail') + `?type=payment`, { state: { dateFilter: filterDate } })
             }

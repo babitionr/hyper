@@ -24,17 +24,17 @@ const Page = () => {
   };
   const items = [
     {
-      label: 'Báo cáo ngày',
+      label: <div className="label-1">Báo cáo ngày</div>,
       key: 'report_date',
       children: type === 'report_date' && <ReportDate type={type} />,
     },
     {
-      label: 'Danh sách bệnh nhân trong ngày',
+      label: <div className="label-1">Danh sách bệnh nhân trong ngày</div>,
       key: 'service-history',
       children: type === 'service-history' && <ServiceHistory type={type} />,
     },
     {
-      label: 'Tổng quan doanh thu',
+      label: <div className="label-1">Tổng quan doanh thu</div>,
       key: 'revenue_overview',
       children: type === 'revenue_overview' ? <RevenueOverview type={type} /> : null,
     },

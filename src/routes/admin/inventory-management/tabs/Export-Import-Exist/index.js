@@ -6,7 +6,8 @@ import { CheckboxMenu } from './checkboxMenu';
 import './index.less';
 import { Export } from './export';
 import { Pagination } from 'components';
-import moment from 'moment';
+// import moment from 'moment';
+import dayjs from 'dayjs';
 
 const { Column, ColumnGroup } = Table;
 
@@ -16,7 +17,7 @@ const ExportImportExist = ({ type }) => {
 
   const [dateFilter, setDateFilter] = useState({
     fromDate: '2022-02-21 00:00:00',
-    toDate: moment().format('YYYY-MM-DD 23:59:59'),
+    toDate: dayjs().format('YYYY-MM-DD 23:59:59'),
   });
   const [reportProductType, setReportProductType] = useState('ALL');
   const [dataExport, setDataExport] = useState([]);
@@ -82,7 +83,6 @@ const ExportImportExist = ({ type }) => {
       setTemptData([]);
       setDataExport([]);
     }
-    return { data: res, count: res.length };
   };
   const handleTableChange = (pagination, filters = {}, sorts, tempFullTextSearch) => {
     const { current, pageSize } = pagination;
@@ -104,7 +104,6 @@ const ExportImportExist = ({ type }) => {
       reportProductType,
     });
     setData(res);
-    return calData(res);
   };
   useEffect(() => {
     getData();
@@ -179,19 +178,19 @@ const ExportImportExist = ({ type }) => {
             <DatePicker.RangePicker
               allowClear={false}
               className="w-full sm:w-[300px] h-10 !bg-white rounded-lg"
-              defaultValue={[moment(dateFilter.fromDate), moment(dateFilter.toDate)]}
+              defaultValue={[dayjs(dateFilter.fromDate), dayjs(dateFilter.toDate)]}
               onChange={(v) => {
                 if (v === null || v === undefined) {
                   setDateFilter({
                     ...dateFilter,
                     fromDate: '2022-02-21 00:00:00',
-                    toDate: moment().format('YYYY-MM-DD 23:59:59'),
+                    toDate: dayjs().format('YYYY-MM-DD 23:59:59'),
                   });
                 } else {
                   setDateFilter({
                     ...dateFilter,
-                    fromDate: `${moment(v[0]).format('YYYY-MM-DD 00:00:00')}`,
-                    toDate: `${moment(v[1]).format('YYYY-MM-DD 23:59:59')}`,
+                    fromDate: `${dayjs(v[0]).format('YYYY-MM-DD 00:00:00')}`,
+                    toDate: `${dayjs(v[1]).format('YYYY-MM-DD 23:59:59')}`,
                   });
                 }
               }}
@@ -262,11 +261,11 @@ const ExportImportExist = ({ type }) => {
             dataIndex="averageQuantity"
             align="center"
             render={(text, record) => {
-              const fromDate = moment(dateFilter.fromDate).format('YYYY-MM-DD 23:59:59');
-              const toDate = moment(dateFilter.toDate).format('YYYY-MM-DD 23:59:59');
+              const fromDate = dayjs(dateFilter.fromDate).format('YYYY-MM-DD 23:59:59');
+              const toDate = dayjs(dateFilter.toDate).format('YYYY-MM-DD 23:59:59');
               const number = (
                 Number(record.exportQuantity) /
-                ((moment(toDate, 'YYYY-MM-DD hh:mm:ss') - moment(fromDate, 'YYYY-MM-DD hh:mm:ss')) / 86400000)
+                ((dayjs(toDate, 'YYYY-MM-DD hh:mm:ss') - dayjs(fromDate, 'YYYY-MM-DD hh:mm:ss')) / 86400000)
               ).toFixed(2);
               if (record.inventoryUnit === 'Tổng')
                 return {
