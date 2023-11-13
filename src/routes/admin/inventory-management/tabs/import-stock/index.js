@@ -92,7 +92,7 @@ export const ImportStock = () => {
               }));
             }
             if (!dates) {
-              setDateFilter((prev) => ({
+              setDateFilter((next) => ({
                 fromDate: '',
                 toDate: '',
               }));
@@ -128,7 +128,9 @@ export const ImportStock = () => {
       </div>
     ),
   });
-  useEffect(() => handleChange(), [dateFilter, statusFilter]);
+  useEffect(() => {
+    handleChange();
+  }, [dateFilter, statusFilter]);
   return (
     <div className="bg-white rounded-lg">
       <div className="p-2">{DataTable()}</div>

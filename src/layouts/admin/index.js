@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dropdown, Avatar, Menu as MenuAnt } from 'antd';
+import { Dropdown, Avatar } from 'antd';
 import { useNavigate } from 'react-router';
 import classNames from 'classnames';
 
@@ -28,31 +28,40 @@ const Layout = ({ children }) => {
   const [isCollapsed, set_isCollapsed] = useState(window.innerWidth < 1025);
   const [isDesktop, set_isDesktop] = useState(window.innerWidth > 767);
 
-  const menuss = (
-    <MenuAnt
-      items={listBrand?.map((i) => ({
-        key: i.uuid,
-        label: i.branchName,
-      }))}
-      onClick={(e) => {
-        if (e.key === localStorage.getItem('branchUuid')) {
-          return false;
-        }
-        setCurrBrand(e.domEvent.target.textContent);
-        setBranchUuid(e.key);
-        // if (window.location.hash.substr(1) === routerLinks('Report')) {
-        //   navigate(routerLinks('Report'), { replace: true })
-        //   window.location.reload()
-        // } else {
-        //   navigate(routerLinks('Home'), { replace: true })
-        //   window.location.reload()
-        // }
-        window.location.reload();
-      }}
-      selectedKeys={localStorage.getItem('branchUuid')}
-    />
-  );
+  const getBrand = async () => {
+    const res = await BranchsService.getBrandHeader();
+    if (res?.data?.filter((i) => i.uuid === localStorage.getItem('branchUuid'))[0]?.uuid === undefined) {
+      setBranchUuid(res?.data[0]?.uuid);
+    } else setBranchUuid(res?.data?.filter((i) => i.uuid === localStorage.getItem('branchUuid'))[0]?.uuid);
+    setlistBrand(res.data);
+    setCurrBrand(res?.data?.filter((i) => i.uuid === localStorage.getItem('branchUuid'))[0]?.branchName);
+  };
+  useEffect(() => {
+    getBrand();
+  }, []);
+  const a = listBrand?.map((i) => ({
+    key: i.uuid,
+    label: (
+      <div
+        onClick={(e) => {
+          console.log(e.key);
+          if (e.key === localStorage.getItem('branchUuid')) {
+            return false;
+          }
+          setCurrBrand(e.domEvent.target.textContent);
+          setBranchUuid(e.key);
+          window.location.reload();
+        }}
+      >
+        {i.branchName}
+      </div>
+    ),
+  }));
+  const menu2 = {
+    items: a,
+  };
 
+  // console.log(menu2);
   useEffect(() => {
     if (window.innerWidth < 1024 && !isCollapsed) {
       setTimeout(() => {
@@ -77,18 +86,6 @@ const Layout = ({ children }) => {
     return () => window.removeEventListener('resize', handleResize, true);
   }, []);
 
-  const getBrand = async () => {
-    const res = await BranchsService.getBrandHeader();
-    if (res?.data?.filter((i) => i.uuid === localStorage.getItem('branchUuid'))[0]?.uuid === undefined) {
-      setBranchUuid(res?.data[0]?.uuid);
-    } else setBranchUuid(res?.data?.filter((i) => i.uuid === localStorage.getItem('branchUuid'))[0]?.uuid);
-    setlistBrand(res.data);
-    setCurrBrand(res?.data?.filter((i) => i.uuid === localStorage.getItem('branchUuid'))[0]?.branchName);
-  };
-  useEffect(() => {
-    getBrand();
-  }, []);
-
   // const getNotifiList = async () => {
   //   const res = await NotificationService.getAllNoti();
   //   const data = res?.content ?? [];
@@ -97,6 +94,33 @@ const Layout = ({ children }) => {
   // useEffect(() => {
   //   getNotifiList();
   // }, []);
+  const menuNav = {
+    items: [
+      {
+        label: (
+          <li
+            className="p-2 hover:bg-gray-100 flex items-center pl-4  border border-b-0 cursor-pointer border-gray-200"
+            onClick={() => navigate(routerLinks('Profile') + `?tab=2`)}
+          >
+            <i className="las la-key text-lg mr-2"></i> Đổi mật khẩu
+          </li>
+        ),
+        key: '1',
+      },
+      {
+        label: (
+          <li
+            className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer border  border-solid border-gray-200"
+            onClick={() => navigate(routerLinks('Login'), { replace: true })}
+          >
+            <i className="las la-sign-out-alt text-lg mr-2"></i> Đăng xuất
+          </li>
+        ),
+        key: '2',
+      },
+    ],
+  };
+  console.log(currBrand);
 
   const Header = ({ isCollapsed, isDesktop }) => (
     <header
@@ -110,38 +134,14 @@ const Layout = ({ children }) => {
       )}
     >
       <div className="flex items-center justify-between px-5 h-16 bg-white">
-        <div className="relative hidden md:block">
-          {/* <span className="absolute right-4 top-2">
-            {' '}
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M14.25 2.25C10.1162 2.25 6.75 5.61621 6.75 9.75C6.75 11.5459 7.37988 13.1924 8.4375 14.4844L2.46094 20.4609L3.53906 21.5391L9.51562 15.5625C10.8076 16.6201 12.4541 17.25 14.25 17.25C18.3838 17.25 21.75 13.8838 21.75 9.75C21.75 5.61621 18.3838 2.25 14.25 2.25ZM14.25 3.75C17.5723 3.75 20.25 6.42773 20.25 9.75C20.25 13.0723 17.5723 15.75 14.25 15.75C10.9277 15.75 8.25 13.0723 8.25 9.75C8.25 6.42773 10.9277 3.75 14.25 3.75Z"
-                fill="#6B7280"
-              />
-            </svg>
-          </span>
-          <Input
-            placeholder="Tìm kiếm"
-            className="!bg-white border border-gray-300 h-[44px] w-[323px] rounded-[10px] px-3 focus:!shadow-none focus:!outline-none"
-          /> */}
-        </div>
+        <div className="relative hidden md:block"></div>
 
         <div className="flex items-center justify-end px-5 h-16">
-          <div className="flex items-center">
-            <div className="mr-3">
-              {/* <Dropdown
-                menu={
-                  listBrand.map((i, index) => ({ key: index, label: i.branchName }))
-                }
-                trigger={['click']}
-              >
-                <a onClick={(e) => e.preventDefault()}>
-                  {listBrand[0]?.branchName}
-                </a>
-              </Dropdown> */}
+          <div className="flex items-center ">
+            <div className="mr-3 ">
               <div className="flex items-center">
-                <span className="mr-1">{exportIcons('MAP')}</span>
-                <Dropdown menu={menuss} trigger={['click']} onMouseEnter={() => getBrand()}>
+                <span className="mr-1 ">{exportIcons('MAP')}</span>
+                <Dropdown menu={menu2} trigger={['click']} onMouseEnter={() => getBrand()}>
                   <a
                     onClick={(e) => {
                       e.preventDefault();
@@ -153,94 +153,11 @@ const Layout = ({ children }) => {
                 </Dropdown>
               </div>
             </div>
-            <NotificationMenu />
-            {/* <div className="mr-5 relative flex group">
-              <div className="rounded-full text-white w-5 h-5 bg-red-500 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
-                1
-              </div>
-              <i className="las la-bell text-4xl text-gray-500" />
-            </div> */}
-            {/* <div className="mr-5 relative flex group">
-            <div className="rounded-full text-white w-5 h-5 bg-yellow-500 absolute -right-1.5 -top-1.5 leading-none text-center pt-1 text-xs group-hover:animate-bounce">
-              76
-            </div>
-            <i className="las la-comment text-4xl text-gray-500" />
-          </div> */}
-            {/*
-            <Dropdown
-              trigger={['hover', 'click']}
-              overlay={
-                <ul className="bg-blue-50">
-                  <li
-                    className="p-2 hover:bg-blue-100"
-                    onClick={() => navigate(routerLinks('Login'), { replace: true })}
-                  >
-                    Sign Out
-                  </li>
-                </ul>
-              }
-              placement="bottomRight"
-            >
+            <NotificationMenu className="w-3 h-3 cursor-pointer" />
+
+            <Dropdown className="bg-white" trigger={['click', 'hover']} menu={menuNav} placement="bottomRight">
               <section className="flex items-center" id={'dropdown-profile'}>
-                <Avatar size={50} src={avatar} id="avatar" />
-              </section>
-            </Dropdown> */}
-            <Dropdown
-              trigger={['click', 'hover']}
-              menu={
-                <ul className="bg-white">
-                  {/* <li
-                    className="p-2 flex items-center pl-4 cursor-pointer border-b border-solid border-gray-200"
-                    style={{
-                      wordBreak: 'break-word',
-                    }}
-                  >
-                    <img
-                      className="w-[35px] h-[35px] rounded-full object-cover mr-2"
-                      src={data?.profileImage || avatar}
-                      alt="profile_pic"
-                    ></img>
-                    <div>
-                      <h1 className="font-bold text-sm">{data?.name}</h1>
-                      <p className="text-[0.6rem]">{data?.email}</p>
-                    </div>
-                  </li> */}
-                  {/* <li
-                    className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer"
-                    onClick={() => navigate(routerLinks('Profile'))}
-                  >
-                    <i className="las la-user text-lg mr-2"></i> Thông tin cá nhân
-                  </li> */}
-                  <li
-                    className="p-2 hover:bg-gray-100 flex items-center pl-4  border border-b-0 cursor-pointer border-gray-200"
-                    onClick={() => navigate(routerLinks('Profile') + `?tab=2`)}
-                  >
-                    <i className="las la-key text-lg mr-2"></i> Đổi mật khẩu
-                  </li>
-                  <li
-                    className="p-2 hover:bg-gray-100 flex items-center pl-4 cursor-pointer border  border-solid border-gray-200"
-                    onClick={() => navigate(routerLinks('Login'), { replace: true })}
-                  >
-                    <i className="las la-sign-out-alt text-lg mr-2"></i> Đăng xuất
-                  </li>
-                </ul>
-              }
-              placement="bottomRight"
-              overlayClassName="rounded-md shadow-md w-[210px]  overflow-hidden"
-            >
-              {/* <section className="flex items-center" id={'dropdown-profile'}>
-                {data?.profileImage ? (
-                  <img
-                    className="w-[35px] h-[35px] rounded-full object-cover mr-2"
-                    src={data?.profileImage}
-                    alt="profile_pic"
-                  ></img>
-                ) : ( */}
-              {/* <Avatar src={avatar} size={50} /> */}
-              {/* )} */}
-              {/* </section> */}
-              <section className="flex items-center cursor-pointer" id={'dropdown-profile'}>
-                <Avatar size={44} src={avatar} id="avatar" />
+                <Avatar size={40} src={avatar} id="avatar" />
               </section>
             </Dropdown>
           </div>
@@ -285,13 +202,6 @@ const Layout = ({ children }) => {
               set_isCollapsed(!isCollapsed);
             }}
           >
-            {/* <img
-              className={classNames('w-4 cursor-pointer', {
-                'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
-              })}
-              src={arrow}
-              alt=""
-            ></img> */}
             <span className="cursor-pointer">{exportIcons('MENU')}</span>
           </div>
         ) : (
@@ -301,13 +211,6 @@ const Layout = ({ children }) => {
               set_isDesktop(!isDesktop);
             }}
           >
-            {/* <img
-              className={classNames('w-4 cursor-pointer', {
-                'rotate-180': (isCollapsed && isDesktop) || (!isCollapsed && !isDesktop),
-              })}
-              src={arrow}
-              alt=""
-            ></img> */}
             <span className="cursor-pointer">{exportIcons('MENU')}</span>
           </div>
         )}
@@ -316,7 +219,6 @@ const Layout = ({ children }) => {
         className={classNames('fixed z-30 top-16 left-0 h-full bg-zinc-700 transition-all duration-300 ease-in-out', {
           'w-72': !isCollapsed,
           'w-20': isCollapsed,
-          // '-left-20': isCollapsed && !isDesktop,
         })}
       >
         <Menu isCollapsed={isCollapsed} />
