@@ -14,14 +14,13 @@ function Dept({ data }) {
     { label: 'Lịch sử thanh toán', key: '2', children: +type === 2 && <PaymentHistory data={data} /> },
   ];
   return (
-    <Tabs defaultActiveKey="1" onTabClick={handleChangeTab}>
+    <Tabs defaultActiveKey="1" onTabClick={handleChangeTab} activeKey={type} onChange={setType} items={items}>
       {/* <Tabs.TabPane tab="Danh sách công nợ" key="1">
         {+type === 1 && <ListDebt data={data} />}
       </Tabs.TabPane>
       <Tabs.TabPane tab="Lịch sử thanh toán" key="2">
         {+type === 2 && <PaymentHistory data={data} />}
       </Tabs.TabPane> */}
-      <Tabs activeKey={type} onChange={setType} items={items}></Tabs>
     </Tabs>
   );
 }

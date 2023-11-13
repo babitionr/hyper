@@ -49,13 +49,36 @@ const Page = ({ type }) => {
     if (!key) return null;
     return navigate(routerLinks('ReportAppointment') + `?tab=${key}`);
   };
-
+  const items = [
+    {
+      label: 'Thống kê theo bác sĩ',
+      key: 'doctor',
+      children: (
+        <ReportAppointmentForDoctor
+          appointmentScheduleReportOverview={appointmentScheduleReportOverview}
+          filter={filter}
+          setFilter={setFilter}
+        />
+      ),
+    },
+    {
+      label: 'Thống kê theo nhân viên Sales',
+      key: 'sales',
+      children: (
+        <ReportAppointmentForSales
+          appointmentScheduleReportOverview={appointmentScheduleReportOverview}
+          filter={filter}
+          setFilter={setFilter}
+        />
+      ),
+    },
+  ];
   return (
     <div className="min-h-screen">
       <div className="bg-white p-4 rounded-lg pb-6">
         <h2 className="font-bold text-lg text-zinc-600">BÁO CÁO LỊCH HẸN</h2>
-        <Tabs onChange={handleChangeTab} activeKey={String(tabName)}>
-          <Tabs.TabPane tab="Thống kê theo bác sĩ" key="doctor">
+        <Tabs onChange={handleChangeTab} activeKey={String(tabName)} items={items}>
+          {/* <Tabs.TabPane tab="Thống kê theo bác sĩ" key="doctor">
             <ReportAppointmentForDoctor
               appointmentScheduleReportOverview={appointmentScheduleReportOverview}
               filter={filter}
@@ -68,7 +91,7 @@ const Page = ({ type }) => {
               filter={filter}
               setFilter={setFilter}
             />
-          </Tabs.TabPane>
+          </Tabs.TabPane> */}
         </Tabs>
       </div>
     </div>

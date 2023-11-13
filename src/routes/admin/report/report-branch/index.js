@@ -18,13 +18,30 @@ function Page() {
     setType(key);
     return navigate(routerLinks('ReportBranch') + `?tab=${key}`);
   };
+  const items = [
+    {
+      label: 'Doanh thu',
+      key: 'revenue',
+      children: type === 'revenue' && <Revenue type={type} />,
+    },
+    {
+      label: 'Thực thu',
+      key: 'real_money',
+      children: type === 'real_money' ? <RealMoney type={type} /> : null,
+    },
+    {
+      label: 'Kết quả kinh doanh',
+      key: 'business_results',
+      children: type === 'business_results' ? <BusinessResults type={type} /> : null,
+    },
+  ];
   return (
     <div className="min-h-screen">
       <div className="bg-white rounded-[10px] p-4 pb-16">
         <h2 className="font-bold text-lg text-zinc-600">BÁO CÁO CHI NHÁNH</h2>
         <div>
-          <Tabs defaultActiveKey={1} onTabClick={handleChangeTab} activeKey={String(tabName)}>
-            <Tabs.TabPane tab="Doanh thu" key="revenue">
+          <Tabs defaultActiveKey={1} onTabClick={handleChangeTab} activeKey={String(tabName)} items={items}>
+            {/* <Tabs.TabPane tab="Doanh thu" key="revenue">
               {type === 'revenue' && <Revenue type={type} />}
             </Tabs.TabPane>
             <Tabs.TabPane tab="Thực thu" key="real_money">
@@ -32,7 +49,7 @@ function Page() {
             </Tabs.TabPane>
             <Tabs.TabPane tab="Kết quả kinh doanh" key="business_results">
               {type === 'business_results' ? <BusinessResults type={type} /> : null}
-            </Tabs.TabPane>
+            </Tabs.TabPane> */}
           </Tabs>
         </div>
       </div>

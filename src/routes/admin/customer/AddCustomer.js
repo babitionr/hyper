@@ -264,7 +264,7 @@ const AddCustomer = ({ handleChange, setShowModal, showModal, canEdit = true, sh
               destroyOnClose={true}
               title={
                 <div className="flex justify-between">
-                  <div className="text-lg font-bold">Thông tin khách hàng</div>
+                  <div className="text-lg font-bold ">Thông tin khách hàng</div>
                   <button
                     className=""
                     onClick={() => {
@@ -281,6 +281,7 @@ const AddCustomer = ({ handleChange, setShowModal, showModal, canEdit = true, sh
               closable={false}
               style={{ top: 5 }}
             >
+              <hr className="overflow-hidden px-0" />
               <Form
                 // onFinish={() => {
                 //   handleOk();

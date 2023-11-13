@@ -3,9 +3,10 @@ import React, { useEffect, useState } from 'react';
 import { columnReportReceiptDetail } from './columns/columnReportReceiptDetail';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { DatePicker } from 'antd';
+import './index.less';
 import { columnReportPaymentDetail } from './columns/columnReportPaymentDetail';
 import { ReportService } from 'services/report';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const ReportDateDetail = () => {
   const branchUuid = localStorage.getItem('branchUuid');
@@ -15,8 +16,8 @@ const ReportDateDetail = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [filterDate, setFilterDate] = useState(
     location?.state?.dateFilter
-      ? moment(location?.state?.dateFilter).format('YYYY-MM-DD 00:00:00')
-      : moment().format('YYYY-MM-DD 00:00:00'),
+      ? dayjs(location?.state?.dateFilter).format('YYYY-MM-DD 00:00:00')
+      : dayjs().format('YYYY-MM-DD 00:00:00'),
   );
   const [handleChange, DataTable] = HookDataTable({
     Get: async (params) => {
@@ -36,15 +37,15 @@ const ReportDateDetail = () => {
     leftHeader: (
       <div className="flex">
         <DatePicker
-          defaultValue={moment(filterDate)}
+          defaultValue={dayjs(filterDate)}
           format={'DD/MM/YYYY'}
-          className="w-full sm:w-[245px] mb-4 bg-white"
+          className="w-full sm:w-[245px] mb-4 bg-white label-1"
           onChange={(date) => {
             if (!date) {
               setFilterDate('');
               return;
             }
-            setFilterDate(moment(date).format('YYYY-MM-DD 00:00:00'));
+            setFilterDate(dayjs(date).format('YYYY-MM-DD 00:00:00'));
           }}
         />
       </div>
@@ -57,7 +58,7 @@ const ReportDateDetail = () => {
   return (
     <div className="min-h-screen">
       <div className="bg-white rounded-lg p-4">
-        <h1 className="text-lg font-bold mb-4">
+        <h1 className="text-lg font-bold mb-4 text-gray-900">
           {type === 'receipt' ? 'BÁO CÁO TIỀN THU CHI TIẾT' : type === 'payment' ? 'BÁO CÁO TIỀN CHI CHI TIẾT' : null}
         </h1>
         <div className="p-2">{DataTable()}</div>

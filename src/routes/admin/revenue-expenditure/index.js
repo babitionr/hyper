@@ -17,19 +17,23 @@ const Page = () => {
     return navigate(routerLinks('RevenueExpenditure') + `?type=${key}`);
   };
 
+  const items = [
+    { label: 'Thu', key: '1', children: +type === 1 && <TabData type={type} /> },
+    { label: 'Chi', key: '2', children: +type === 2 ? <TabData type={type} /> : null },
+  ];
   return (
     <Fragment>
       <div className="min-h-screen">
         <div className="bg-white rounded-[10px] p-4 revenueExpenditure">
           <h2 className="font-bold text-lg text-zinc-600">{'Quản lý thu chi'.toUpperCase()}</h2>
           <div>
-            <Tabs defaultActiveKey={1} onTabClick={handleChangeTab} activeKey={String(tabName)}>
-              <Tabs.TabPane tab="Thu" key="1">
+            <Tabs defaultActiveKey={1} onTabClick={handleChangeTab} activeKey={String(tabName)} items={items}>
+              {/* <Tabs.TabPane tab="Thu" key="1">
                 {+type === 1 && <TabData type={type} />}
               </Tabs.TabPane>
               <Tabs.TabPane tab="Chi" key="2">
                 {+type === 2 ? <TabData type={type} /> : null}
-              </Tabs.TabPane>
+              </Tabs.TabPane> */}
             </Tabs>
           </div>
         </div>

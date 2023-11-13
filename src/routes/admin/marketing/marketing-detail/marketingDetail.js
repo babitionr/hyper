@@ -104,6 +104,34 @@ const Page = () => {
   //   initFunction();
   // }, [initFunction, pathname]);
 
+  const items = [
+    {
+      label: 'Content',
+      key: '1',
+      children: tabName === 'Content' ? <MarketingContent /> : <></>,
+    },
+    {
+      label: 'Design',
+      key: '2',
+      children: tabName === 'Design' ? <MarketingDesign></MarketingDesign> : <></>,
+    },
+    {
+      label: 'SEO',
+      key: '3',
+      children: tabName === 'SEO' ? <MarketingSeo></MarketingSeo> : <></>,
+    },
+    {
+      label: 'Chatpage',
+      key: '4',
+      children: tabName === 'Chatpage' ? <MarketingChatpage></MarketingChatpage> : <></>,
+    },
+    {
+      label: '',
+      key: '5',
+      children: tabName === 'Telesales' ? <MarketingTelesales></MarketingTelesales> : <></>,
+    },
+  ];
+
   return (
     <Fragment>
       <div className="min-h-screen">
@@ -126,8 +154,9 @@ const Page = () => {
               defaultActiveKey={convertKeyTab}
               onTabClick={callbackTabClicked}
               activeKey={convertKeyTab(tabName) || 1}
+              items={items}
             >
-              <Tabs.TabPane tab="Content" key="1">
+              {/* <Tabs.TabPane tab="Content" key="1">
                 {tabName === 'Content' ? <MarketingContent /> : <></>}
               </Tabs.TabPane>
               <Tabs.TabPane tab="Design" key="2">
@@ -141,7 +170,7 @@ const Page = () => {
               </Tabs.TabPane>
               <Tabs.TabPane tab="Telesales" key="5">
                 {tabName === 'Telesales' ? <MarketingTelesales></MarketingTelesales> : <></>}
-              </Tabs.TabPane>
+              </Tabs.TabPane> */}
             </Tabs>
           </div>
         </div>

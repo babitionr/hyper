@@ -428,6 +428,99 @@ export const TreatmentSlip = (props) => {
 
   const codeId = form.getFieldValue('code');
 
+  const items = [
+    {
+      label: 'Dịch vụ',
+      key: 'serviceList',
+      children: (
+        <>
+          <div className="text-lg font-bold mb-2">Danh sách dịch vụ</div>
+          <>{DataTableService()}</>
+          <div className="flex justify-between pt-3">
+            <div></div>
+            <div>
+              <div className="flex gap-36 justify-between">
+                <div className="text-base font-medium">Thành tiền</div>
+
+                <div className="text-base font-medium">
+                  {Number(totalMoney().thanhTien).toLocaleString('de-DE') + ' VND'}
+                </div>
+              </div>
+              <div className="flex gap-36 justify-between">
+                <div className="text-base font-medium">Tổng giảm giá</div>
+                <div className="text-base font-medium">
+                  {Number(totalMoney().tongGiamGia).toLocaleString('de-DE') + ' VND'}
+                </div>
+              </div>
+              <div className="flex gap-36 justify-between">
+                <div className="text-base font-medium">Tổng tiền</div>
+                <div className="text-base font-medium">
+                  {Number(totalMoney().tongTien).toLocaleString('de-DE') + ' VND'}
+                </div>
+              </div>
+              <div className="flex gap-36 justify-between">
+                <div className="text-base font-medium">Tổng tiền đã trả</div>
+                <div className="text-base font-medium">
+                  {Number(totalMoney().tongTienDaTra).toLocaleString('de-DE') + ' VND'}
+                </div>
+              </div>
+              <div className="flex gap-36 justify-between">
+                <div className="text-base font-medium">Tổng số tiền còn lại</div>
+                <div className="text-base font-medium">
+                  {Number(totalMoney().tongTienConLai).toLocaleString('de-DE') + ' VND'}
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      label: 'Lịch sử điều trị',
+      key: 'saleOrderHistory',
+      children:
+        checkPermission && checkPermission('MANAGE_CUSTOMER_TH') ? (
+          saleOrderId ? (
+            <div className="">
+              <div className="flex justify-between">
+                <div className="text-lg font-bold">Lịch sử điều trị</div>
+                <div>
+                  {!toggleDoubleClick ? (
+                    <div
+                      onClick={() => {
+                        setShowModalAddNewSaleOrderHistory(true);
+                      }}
+                      className="bg-rose-500 text-white px-4 py-2.5 rounded-xl hover:bg-rose-400 inline-flex items-center cursor-pointer"
+                    >
+                      <i className="las la-plus mr-1" />
+                      Thêm lịch sử và thanh toán
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+              {DataSaleOrderHistory()}
+            </div>
+          ) : null
+        ) : null,
+    },
+    {
+      label: 'Lịch sử thanh toán',
+      key: 'paymentHistory',
+      children:
+        checkPermission && checkPermission('MANAGE_CUSTOMER_TH') ? (
+          saleOrderId ? (
+            <div className="">
+              <div className="flex justify-between">
+                <div className="text-lg font-bold">Lịch sử thanh toán</div>
+                <div></div>
+              </div>
+              {DataPaymentHistory()}
+            </div>
+          ) : null
+        ) : null,
+    },
+  ];
+
   return (
     <div>
       {toggleAddNew === false ? (
@@ -611,8 +704,9 @@ export const TreatmentSlip = (props) => {
             activeKey={subTabDetailTreatmentSlip}
             onTabClick={handleChangeSubTabDetailTreatmentSlip}
             className="border rounded-lg px-4 pb-4"
+            items={items}
           >
-            <Tabs.TabPane tab="Dịch vụ" key="serviceList">
+            {/* <Tabs.TabPane tab="Dịch vụ" key="serviceList">
               <div className="text-lg font-bold mb-2">Danh sách dịch vụ</div>
               <>{DataTableService()}</>
               <div className="flex justify-between pt-3">
@@ -689,7 +783,7 @@ export const TreatmentSlip = (props) => {
                   </div>
                 </Tabs.TabPane>
               ) : null
-            ) : null}
+            ) : null} */}
           </Tabs>
 
           <Form.Item>

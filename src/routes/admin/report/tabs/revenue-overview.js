@@ -5,7 +5,8 @@ import { columnGroupTreatment } from '../columns/columnGroupTreatment';
 import { columnGroupCustomer } from '../columns/columnGroupCustomer';
 import { HookDataTable } from 'hooks';
 import { fortmatType } from 'utils/constants';
-import moment from 'moment';
+// import moment from 'moment';
+import dayjs from 'dayjs';
 import { ReportService } from 'services/report';
 import { formatCurrency } from 'utils';
 import { formatPrice } from 'utils/func';
@@ -13,8 +14,8 @@ import { formatPrice } from 'utils/func';
 function RevenueOverview() {
   const branchUuid = localStorage.getItem('branchUuid');
   const [filter, setFilter] = useState({
-    fromDate: moment().format('YYYY-MM-DD 00:00:00'),
-    toDate: moment().format('YYYY-MM-DD 00:00:00'),
+    fromDate: dayjs().format('YYYY-MM-DD 00:00:00'),
+    toDate: dayjs().format('YYYY-MM-DD 00:00:00'),
   });
   const [total, setTotal] = useState({
     totalCustomer: 0,
@@ -97,28 +98,32 @@ function RevenueOverview() {
     handleChange();
     handleChange2();
   }, [filter.fromDate, filter.toDate]);
-
+  console.log(filter);
+  // const [pickerValue, setPickerValue] = React.useState(moment(filter.fromDate));
+  // React.useEffect(() => {
+  //   setTimeout(() => setPickerValue(moment(filter.toDate)));
+  // }, []);
   return (
     <div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 my-5 gap-4">
         <DatePicker.RangePicker
           allowClear={false}
-          value={[moment(filter.fromDate), moment(filter.toDate)]}
+          value={[dayjs(filter.fromDate), dayjs(filter.toDate)]}
           className="w-full sm:w-[300px] h-[42px] !bg-white"
           format={'DD/MM/YYYY'}
           onChange={(date) => {
             if (!date) {
               setFilter((prev) => ({
                 ...prev,
-                fromDate: moment().format(fortmatType.formatDateTimeSend),
-                toDate: moment().format(fortmatType.formatDateTimeSend),
+                fromDate: dayjs().format(fortmatType.formatDateTimeSend),
+                toDate: dayjs().format(fortmatType.formatDateTimeSend),
               }));
               return;
             }
             setFilter((prev) => ({
               ...prev,
-              fromDate: moment(date[0]).format(fortmatType.formatDateTimeSend),
-              toDate: moment(date[1]).format(fortmatType.formatDateTimeSend),
+              fromDate: dayjs(date[0]).format(fortmatType.formatDateTimeSend),
+              toDate: dayjs(date[1]).format(fortmatType.formatDateTimeSend),
             }));
           }}
         />
