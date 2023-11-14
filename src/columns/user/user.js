@@ -4,6 +4,7 @@ import RemoveIcon from 'assets/svg/remove.js';
 import React, { Fragment } from 'react';
 import { Avatar } from 'components';
 import { routerLinks } from 'utils';
+import './index.less';
 const Column = ({ t, formatDate, listGender, handleEdit, handleDelete }) => {
   return [
     {

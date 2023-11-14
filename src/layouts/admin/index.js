@@ -164,7 +164,7 @@ const Layout = ({ children }) => {
 
             <Dropdown className="bg-white" trigger={['click', 'hover']} menu={menuNav} placement="bottomRight">
               <section className="flex items-center" id={'dropdown-profile'}>
-                <Avatar size={40} src={avatar} id="avatar" />
+                <Avatar size={45} src={avatar} id="avatar" />
               </section>
             </Dropdown>
           </div>

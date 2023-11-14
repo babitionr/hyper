@@ -1,4 +1,4 @@
-import { Form, Input, Select, Modal, DatePicker, TimePicker, Button } from 'antd';
+import { Form, Input, Select, Modal, DatePicker, TimePicker, Button, ConfigProvider } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { CalendarService } from 'services/appointment-schedule';
 import moment from 'moment';
@@ -188,341 +188,380 @@ const CreateCalendar = ({ setShowModal, showModal }) => {
       <>
         {' '}
         {showModal && (
-          <Modal
-            destroyOnClose={true}
-            title={
-              <div className="flex justify-between">
-                <div className="text-lg font-bold">{!dataEdit?.uuid ? 'Đặt lịch hẹn' : 'Chỉnh sửa lịch hẹn'}</div>
-                <button
-                  className=""
-                  onClick={() => {
-                    handleCancel();
-                  }}
-                >
-                  <span className="icon-x-close pr-2"></span>
-                </button>
-              </div>
-            }
-            open={showModal}
-            footer={null}
-            className="!w-8/12 xl:!w-7/12 min-w-min pb-0"
-            closable={false}
-            // style={{ top: 5 }}
+          <ConfigProvider
+            theme={{
+              components: {
+                Modal: {
+                  wireframe: true, // here
+                },
+              },
+            }}
           >
-            <Form
-              form={form}
-              onFinishFailed={({ errorFields }) =>
-                errorFields.length && form.scrollToField(errorFields[0].name, { behavior: 'smooth' })
+            <Modal
+              destroyOnClose={true}
+              title={
+                <div className="flex justify-between">
+                  <div className="text-lg font-bold">{!dataEdit?.uuid ? 'Đặt lịch hẹn' : 'Chỉnh sửa lịch hẹn'}</div>
+                  <button
+                    className=""
+                    onClick={() => {
+                      handleCancel();
+                    }}
+                  >
+                    <span className="icon-x-close pr-2"></span>
+                  </button>
+                </div>
               }
-              // onValuesChange={(_, values) => setFormValues((prevState) => ({ ...prevState, ...values }))}
-              colon={false}
-              className=" min-w-min"
+              open={showModal}
+              footer={null}
+              className="!w-8/12 xl:!w-7/12 min-w-min pb-0"
+              closable={false}
+              // style={{ top: 5 }}
             >
-              <div className="">
-                <div className="  bg-white ">
-                  <div className="p-2">
-                    <div className="flex gap-4">
-                      <div className="flex flex-wrap gap-2 w-full">
-                        <div className="w-full flex justify-between gap-4">
-                          <div className="w-6/12 flex gap-2">
-                            <Form.Item
-                              className={classNames('w-full', {
-                                'w-[calc(100%-48px)]': !dataEdit?.id,
-                              })}
-                              label="Khách hàng"
-                              name="customer"
-                              rules={[
-                                {
-                                  required: true,
-                                  message: 'Vui lòng chọn khách hàng!',
-                                },
-                              ]}
-                            >
-                              <Select
-                                allowClear
-                                showSearch
-                                filterOption={(search, item) => {
-                                  const itemValue = item.children.trim().toLowerCase();
-                                  const searchValue = search.trim().toLowerCase();
-                                  // xóa dấu và thay ký tự đĐ
-                                  const itemValueNormalize = itemValue
-                                    .normalize('NFD')
-                                    .replace(/[\u0300-\u036f]/g, '')
-                                    .replace(/[đĐ]/g, 'd');
-                                  const searchValueNormalize = searchValue
-                                    .normalize('NFD')
-                                    .replace(/[\u0300-\u036f]/g, '')
-                                    .replace(/[đĐ]/g, 'd');
-                                  return itemValueNormalize.indexOf(searchValueNormalize) >= 0;
-                                }}
-                                className="!w-full !rounded-lg  text-sm font-normal"
-                                placeholder="Chọn khách hàng"
-                                onChange={(value) => {
-                                  const customer = listData.listCustomer.find((i) => i.uuid === value);
-                                  form.setFieldsValue({
-                                    contactNumber: customer?.phoneNumber,
-                                  });
-                                }}
-                              >
-                                {listData?.listCustomer?.map((i, idx) => (
-                                  <Option key={idx} className="w-full" value={i.uuid}>
-                                    {`${i.fullName} (${i.phoneNumber ?? 'Chưa có số điện thoại'})`}
+              <Form
+                form={form}
+                onFinishFailed={({ errorFields }) =>
+                  errorFields.length && form.scrollToField(errorFields[0].name, { behavior: 'smooth' })
+                }
+                // onValuesChange={(_, values) => setFormValues((prevState) => ({ ...prevState, ...values }))}
+                colon={false}
+                className=" min-w-min"
+              >
+                <div className="">
+                  <div className="  bg-white ">
+                    <div className="p-2">
+                      <div className="flex gap-4">
+                        <div className="flex flex-wrap gap-2 w-full">
+                          <div className="w-full flex justify-between gap-4">
+                            <div className="w-6/12">
+                              <div className="w-full custom1">
+                                <Form.Item
+                                  className={classNames('w-full !m-0', {
+                                    'w-[calc(100%-48px)]': !dataEdit?.id,
+                                  })}
+                                  label="Khách hàng"
+                                  name="customer"
+                                  rules={[
+                                    {
+                                      required: true,
+                                      message: 'Vui lòng chọn khách hàng!',
+                                    },
+                                  ]}
+                                ></Form.Item>
+                                <div className="flex custom1">
+                                  <Select
+                                    allowClear
+                                    showSearch
+                                    filterOption={(search, item) => {
+                                      const itemValue = item.children.trim().toLowerCase();
+                                      const searchValue = search.trim().toLowerCase();
+                                      // xóa dấu và thay ký tự đĐ
+                                      const itemValueNormalize = itemValue
+                                        .normalize('NFD')
+                                        .replace(/[\u0300-\u036f]/g, '')
+                                        .replace(/[đĐ]/g, 'd');
+                                      const searchValueNormalize = searchValue
+                                        .normalize('NFD')
+                                        .replace(/[\u0300-\u036f]/g, '')
+                                        .replace(/[đĐ]/g, 'd');
+                                      return itemValueNormalize.indexOf(searchValueNormalize) >= 0;
+                                    }}
+                                    className="!w-full !rounded-lg  text-sm font-normal custom1"
+                                    placeholder="Chọn khách hàng"
+                                    onChange={(value) => {
+                                      const customer = listData.listCustomer.find((i) => i.uuid === value);
+                                      form.setFieldsValue({
+                                        contactNumber: customer?.phoneNumber,
+                                      });
+                                    }}
+                                  >
+                                    {listData?.listCustomer?.map((i, idx) => (
+                                      <Option key={idx} className="w-full custom1" value={i.uuid}>
+                                        {`${i.fullName} (${i.phoneNumber ?? 'Chưa có số điện thoại'})`}
+                                      </Option>
+                                    ))}
+                                  </Select>
+                                  {!dataEdit?.id && (
+                                    <Form.Item className="!ml-2">
+                                      <Button
+                                        onClick={() => {
+                                          handleOpenAddUserModal(true);
+                                        }}
+                                        className="!border-rose-500 border !text-white bg-rose-500 focus:!bg-rose-600
+                                 hover:!bg-rose-600 flex h-10 !w-10 items-center !rounded-lg justify-center custom1"
+                                      >
+                                        <i className="las la-plus bold"></i>
+                                      </Button>
+                                    </Form.Item>
+                                  )}
+                                </div>
+                              </div>
+                            </div>
+                            <div className="w-6/12">
+                              <Form.Item
+                                className="w-full !m-0 custom1 bg-white"
+                                name="contactNumber"
+                                label="Số điện thoại"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng nhập số điện thoại',
+                                  },
+                                ]}
+                              ></Form.Item>
+                              <Input
+                                className="h-10 w-full text-sm font-normal block rounded-lg border border-gray-200  py-[7px] px-4 custom1 custom2"
+                                placeholder="Số điện thoại"
+                              />
+                            </div>
+                          </div>
+                          <div className="w-full flex justify-between gap-4 !mb-5">
+                            <div className="w-full custom1">
+                              <Form.Item
+                                className="w-1/3 !m-0"
+                                name="doctor"
+                                label="Bác sĩ"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng chọn bác sĩ!',
+                                  },
+                                ]}
+                              ></Form.Item>
+                              <Select className="w-full !rounded-lg  text-sm font-normal" placeholder="Chọn bác sĩ">
+                                {listData?.listDoctor?.map((i, idx) => (
+                                  <Option key={idx} className="w-full custom1" value={i.id}>
+                                    {i.lastName + ' ' + i.firstName}
                                   </Option>
                                 ))}
                               </Select>
-                            </Form.Item>
-                            {!dataEdit?.id && (
-                              <Form.Item label=" " className="!w-10">
-                                <Button
-                                  onClick={() => {
-                                    handleOpenAddUserModal(true);
-                                  }}
-                                  className="!border-rose-500 border !text-white bg-rose-500 focus:!bg-rose-600
-                                 hover:!bg-rose-600 flex h-10 items-center !w-full !rounded-lg justify-center"
-                                >
-                                  <i className="las la-plus bold"></i>
-                                </Button>
-                              </Form.Item>
-                            )}
-                          </div>
-                          <Form.Item
-                            className="w-6/12"
-                            name="contactNumber"
-                            label="Số điện thoại"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Vui lòng nhập số điện thoại',
-                              },
-                            ]}
-                          >
-                            <Input
-                              className="h-10 w-full text-sm font-normal block  rounded-lg border border-gray-200  py-[7px] px-4 "
-                              placeholder="Số điện thoại"
-                            />
-                          </Form.Item>
-                        </div>
-                        <div className="w-full flex justify-between gap-4">
-                          <Form.Item
-                            className="w-1/3"
-                            name="doctor"
-                            label="Bác sĩ"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Vui lòng chọn bác sĩ!',
-                              },
-                            ]}
-                          >
-                            <Select className="w-full !rounded-lg  text-sm font-normal" placeholder="Chọn bác sĩ">
-                              {listData?.listDoctor?.map((i, idx) => (
-                                <Option key={idx} className="w-full" value={i.id}>
-                                  {i.lastName + ' ' + i.firstName}
-                                </Option>
-                              ))}
-                            </Select>
-                          </Form.Item>
-                          <Form.Item
-                            className="w-1/3"
-                            name="service"
-                            label="Nhóm dịch vụ"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Vui lòng chọn dịch vụ!',
-                              },
-                            ]}
-                          >
-                            <Select className="w-full !rounded-lg  text-sm font-normal" placeholder="Chọn dịch vụ">
-                              {listData?.listServices?.map((i, idx) => (
-                                <Option key={idx} className="w-full" value={i.id}>
-                                  {i.name}
-                                </Option>
-                              ))}
-                            </Select>
-                          </Form.Item>
-                          <Form.Item className="w-1/3" name="saleEmployeeUuid" label="Sale">
-                            <Select
-                              className="!w-full !rounded-lg  text-sm font-normal"
-                              placeholder="Chọn nhân viên sales"
-                              allowClear
-                              showSearch
-                              optionFilterProp="children"
-                              filterOption={(input, option) =>
-                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                              }
-                              options={listData.listUserBySales.map((i) => ({
-                                value: i?.uuid,
-                                label: i?.firstName ?? '' + ' ' + i?.lastName ?? '',
-                              }))}
-                            ></Select>
-                          </Form.Item>
-                        </div>
-                        <div className="w-full flex justify-between gap-4">
-                          <Form.Item
-                            className="w-1/3"
-                            label="Ngày hẹn"
-                            name="eventDay"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Vui lòng chọn ngày hẹn!',
-                              },
-                            ]}
-                            initialValue={moment()}
-                          >
-                            <DatePicker
-                              placeholder="DD/MM/YYYY"
-                              className="!w-full border rounded-lg !bg-white  border-gray-200"
-                              format="DD/MM/YYYY"
-                            />
-                          </Form.Item>
-                          <Form.Item
-                            className="w-1/3"
-                            label="Giờ hẹn"
-                            name="eventHour"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Vui lòng chọn giờ hẹn!',
-                              },
-                            ]}
-                            initialValue={moment()}
-                          >
-                            <TimePicker
-                              placeholder="HH:mm"
-                              className="!w-full border rounded-lg !bg-white  border-gray-200"
-                              format="HH:mm"
-                              disabledTime={() => {
-                                return {
-                                  disabledHours: () => [0, 1, 2, 3, 4, 5, 6, 21, 22, 23],
-                                };
-                              }}
-                            />
-                          </Form.Item>
-                          <Form.Item
-                            className="w-1/3"
-                            name="expected"
-                            label="Dự kiến"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Vui lòng chọn thời gian dự kiến!',
-                              },
-                            ]}
-                          >
-                            <Select className="w-full !rounded-lg  text-sm font-normal" placeholder="Chọn thời gian">
-                              {listData.listExpected.map((i, idx) => {
-                                return (
-                                  <Option key={idx} value={i.value}>
-                                    {i.key}
+                            </div>
+                            <div className="w-full custom1">
+                              <Form.Item
+                                className="w-1/3 !m-0"
+                                name="service"
+                                label="Nhóm dịch vụ"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng chọn dịch vụ!',
+                                  },
+                                ]}
+                              ></Form.Item>
+                              <Select className="w-full !rounded-lg  text-sm font-normal" placeholder="Chọn dịch vụ">
+                                {listData?.listServices?.map((i, idx) => (
+                                  <Option key={idx} className="w-full custom1" value={i.id}>
+                                    {i.name}
                                   </Option>
-                                );
-                              })}
-                            </Select>
-                          </Form.Item>
-                        </div>
+                                ))}
+                              </Select>
+                            </div>
+                            <div className="w-full custom1">
+                              <Form.Item className="w-1/3 !m-0" name="saleEmployeeUuid" label="Sale"></Form.Item>
+                              <Select
+                                className="!w-full !rounded-lg  text-sm font-normal custom1"
+                                placeholder="Chọn nhân viên sales"
+                                allowClear
+                                showSearch
+                                optionFilterProp="children"
+                                filterOption={(input, option) =>
+                                  (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                }
+                                options={listData.listUserBySales.map((i) => ({
+                                  value: i?.uuid,
+                                  label: i?.firstName ?? '' + ' ' + i?.lastName ?? '',
+                                }))}
+                              ></Select>
+                            </div>
+                          </div>
+                          <div className="w-full flex justify-between gap-4 !mb-5">
+                            <div className="w-full custom1">
+                              <Form.Item
+                                className="w-1/3 !m-0"
+                                label="Ngày hẹn"
+                                name="eventDay"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng chọn ngày hẹn!',
+                                  },
+                                ]}
+                                initialValue={moment()}
+                              ></Form.Item>
 
-                        <div className="w-full flex justify-between gap-4">
-                          <Form.Item className="w-6/12" name="status" label="Trạng thái" initialValue={'COMING'}>
-                            <Select className="w-full !rounded-lg  text-sm font-normal" placeholder="Chọn trạng thái">
-                              <Option className="w-full" value="COMING">
-                                Đang đến
-                              </Option>
-                              <Option className="w-full" value="CAME">
-                                Đã đến
-                              </Option>
-                              <Option className="w-full" value="CANCEL">
-                                Hủy hẹn
-                              </Option>
-                              <Option className="w-full" value="DELAY">
-                                Trễ hẹn
-                              </Option>
-                              <Option className="w-full" value="NOT_COME">
-                                Không đến
-                              </Option>
-                            </Select>
-                          </Form.Item>
-                          <Form.Item
-                            className="w-6/12"
-                            name="customerType"
-                            label="Loại khách"
-                            rules={[
-                              {
-                                required: true,
-                                message: 'Vui lòng chọn loại khách!',
-                              },
-                            ]}
-                          >
-                            <Select className="w-full !rounded-lg  text-sm font-normal" placeholder="Chọn loại khách">
-                              <Option className="w-full" value="RE_EXAMINATION">
-                                Tái khám
-                              </Option>
-                              <Option className="w-full" value="NEW">
-                                Khách mới
-                              </Option>
-                            </Select>
-                          </Form.Item>
-                        </div>
-                        <div className="w-full flex justify-between gap-4">
-                          <Form.Item className="w-full" name="content" label="Nội dung">
+                              <DatePicker
+                                placeholder="DD/MM/YYYY"
+                                className="!w-full border rounded-lg !bg-white  border-gray-200"
+                                format="DD/MM/YYYY"
+                              />
+                            </div>
+                            <div className="w-full custom1">
+                              <Form.Item
+                                className="w-1/3 !m-0"
+                                label="Giờ hẹn"
+                                name="eventHour"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng chọn giờ hẹn!',
+                                  },
+                                ]}
+                                initialValue={moment()}
+                              ></Form.Item>
+
+                              <TimePicker
+                                placeholder="HH:mm"
+                                className="!w-full border rounded-lg !bg-white  border-gray-200"
+                                format="HH:mm"
+                                disabledTime={() => {
+                                  return {
+                                    disabledHours: () => [0, 1, 2, 3, 4, 5, 6, 21, 22, 23],
+                                  };
+                                }}
+                              />
+                            </div>
+                            <div className="w-full custom1">
+                              <Form.Item
+                                className="w-1/3 !m-0"
+                                name="expected"
+                                label="Dự kiến"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng chọn thời gian dự kiến!',
+                                  },
+                                ]}
+                              ></Form.Item>
+                              <Select
+                                className="w-full !rounded-lg custom1 text-sm font-normal"
+                                placeholder="Chọn thời gian"
+                              >
+                                {listData.listExpected.map((i, idx) => {
+                                  return (
+                                    <Option key={idx} value={i.value}>
+                                      {i.key}
+                                    </Option>
+                                  );
+                                })}
+                              </Select>
+                            </div>
+                          </div>
+
+                          <div className="w-full flex justify-between gap-4 !mb-5">
+                            <div className="w-full custom1">
+                              <Form.Item
+                                className="w-6/12 !m-0"
+                                name="status"
+                                label="Trạng thái"
+                                initialValue={'COMING'}
+                              ></Form.Item>
+                              <Select
+                                className="w-full !rounded-lg  text-sm font-normal custom1"
+                                placeholder="Chọn trạng thái"
+                              >
+                                <Option className="w-full custom1" value="COMING">
+                                  Đang đến
+                                </Option>
+                                <Option className="w-full custom1" value="CAME">
+                                  Đã đến
+                                </Option>
+                                <Option className="w-full custom1" value="CANCEL">
+                                  Hủy hẹn
+                                </Option>
+                                <Option className="w-full custom1" value="DELAY">
+                                  Trễ hẹn
+                                </Option>
+                                <Option className="w-full custom1" value="NOT_COME">
+                                  Không đến
+                                </Option>
+                              </Select>
+                            </div>
+                            <div className="w-full custom1">
+                              <Form.Item
+                                className="w-6/12 !m-0"
+                                name="customerType"
+                                label="Loại khách"
+                                rules={[
+                                  {
+                                    required: true,
+                                    message: 'Vui lòng chọn loại khách!',
+                                  },
+                                ]}
+                              ></Form.Item>
+                              <Select
+                                className="w-full !rounded-lg  text-sm font-normal custom1"
+                                placeholder="Chọn loại khách"
+                              >
+                                <Option className="w-full custom1" value="RE_EXAMINATION">
+                                  Tái khám
+                                </Option>
+                                <Option className="w-full custom1" value="NEW">
+                                  Khách mới
+                                </Option>
+                              </Select>
+                            </div>
+                          </div>
+                          <div className="w-full justify-between gap-4 !mb-3">
+                            <div className="w-full custom1"></div>
+                            <Form.Item className="w-full custom1 !m-0" name="content" label="Nội dung"></Form.Item>
+
                             <TextArea
                               rows={4}
                               placeholder="Ghi chú"
-                              className="w-full text-sm font-normal block  rounded-lg border border-gray-200 !bg-white py-[7px] px-4"
+                              className="w-full text-sm font-normal block  rounded-lg border border-gray-200 !bg-white py-[7px] px-4 custom1"
                             />
-                          </Form.Item>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <Form.Item>
-                    <div className="flex items-center justify-center  border-solid gap-6 border-slate-200 rounded-b">
-                      <button
-                        className="active:ring-2 ring-offset-1 ring-offset-gray-300 ring-gray-300 bg-white text-gray-500 border-gray-400 border !rounded-lg px-16 py-2 text-base font-medium  "
-                        type="button"
-                        onClick={() => {
-                          handleCancel();
-                        }}
-                      >
-                        Hủy
-                      </button>
-                      <Button
-                        className=" !border-rose-500 border !text-white !bg-rose-500 focus:!bg-rose-600 hover:!bg-rose-600 !px-16 flex items-center justify-center !pt-4 !pb-6 !text-base font-medium !mr-0 "
-                        loading={isLoadingSubmit}
-                        disabled={isLoadingSubmit}
-                        onClick={async () => {
-                          try {
-                            await form.validateFields();
-                            await handleSubmit();
-                          } catch (error) {
-                            console.log(error);
-                          }
-                        }}
-                      >
-                        <span className="pt-2">Lưu</span>
-                      </Button>
-                      {dataEdit?.uuid && permission?.delete && (
+                    <Form.Item>
+                      <div className="flex items-center justify-center  border-solid gap-6 border-slate-200 rounded-b">
+                        <button
+                          className="active:ring-2 ring-offset-1 ring-offset-gray-300 ring-gray-300 bg-white text-gray-500 border-gray-400 border !rounded-lg px-16 py-2 text-base font-medium  "
+                          type="button"
+                          onClick={() => {
+                            handleCancel();
+                          }}
+                        >
+                          Hủy
+                        </button>
                         <Button
                           className=" !border-rose-500 border !text-white !bg-rose-500 focus:!bg-rose-600 hover:!bg-rose-600 !px-16 flex items-center justify-center !pt-4 !pb-6 !text-base font-medium !mr-0 "
-                          onClick={async (e) => {
-                            e.preventDefault();
+                          loading={isLoadingSubmit}
+                          disabled={isLoadingSubmit}
+                          onClick={async () => {
                             try {
-                              setOpenModalDelete(true);
+                              await form.validateFields();
+                              await handleSubmit();
                             } catch (error) {
                               console.log(error);
                             }
                           }}
                         >
-                          <span className="pt-2">Xóa</span>
+                          <span className="pt-2">Lưu</span>
                         </Button>
-                      )}
-                    </div>
-                  </Form.Item>
+                        {dataEdit?.uuid && permission?.delete && (
+                          <Button
+                            className=" !border-rose-500 border !text-white !bg-rose-500 focus:!bg-rose-600 hover:!bg-rose-600 !px-16 flex items-center justify-center !pt-4 !pb-6 !text-base font-medium !mr-0 "
+                            onClick={async (e) => {
+                              e.preventDefault();
+                              try {
+                                setOpenModalDelete(true);
+                              } catch (error) {
+                                console.log(error);
+                              }
+                            }}
+                          >
+                            <span className="pt-2">Xóa</span>
+                          </Button>
+                        )}
+                      </div>
+                    </Form.Item>
+                  </div>
                 </div>
-              </div>
-            </Form>
-          </Modal>
+              </Form>
+            </Modal>
+          </ConfigProvider>
         )}
         {AddCustomerModal()}
         <Modal

@@ -3,6 +3,7 @@ import moment from 'moment';
 import { Popconfirm, Tooltip } from 'antd';
 import { useAuth } from 'global';
 import { exportIcons } from 'utils';
+import './index.less';
 
 const Column = ({ setDataSaleOrderHistory, setShowModalAddNewSaleOrderHistory, deleteSaleOrderHistory }) => {
   const { user } = useAuth();
@@ -97,9 +98,12 @@ const Column = ({ setDataSaleOrderHistory, setShowModalAddNewSaleOrderHistory, d
                   <Popconfirm
                     placement="left"
                     title={'Bạn có chắc muốn xóa ?'}
-                    icon={<i className="las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />}
+                    icon={
+                      <i className="mr-2 las la-question-circle text-2xl text-yellow-500 absolute -top-0.5 -left-1" />
+                    }
                     okText={'Đồng ý'}
                     cancelText={'Huỷ bỏ'}
+                    className="w-30"
                     onConfirm={() => deleteSaleOrderHistory(data?.uuid)}
                   >
                     <button className="embed mr-2">{exportIcons('DEL')}</button>

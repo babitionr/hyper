@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Message, Spin } from 'components';
 
 import { HookDataTable } from 'hooks';
-import moment from 'moment/moment';
+import dayjs from 'dayjs';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 import { LaboService } from 'services/labo';
@@ -154,8 +154,8 @@ function Labo({ cusName, idCustomer, canEdit = true, showText = true }) {
       treatment: record?.saleOrderNumber || record?.code,
       note: data?.note,
       techNote: data?.techNote,
-      timeSend: data?.timeSend ? moment(data?.timeSend) : moment(new Date()),
-      timeReceive: data?.timeReceive ? moment(data?.timeReceive) : null,
+      timeSend: data?.timeSend ? dayjs(data?.timeSend) : dayjs(new Date()),
+      timeReceive: data?.timeReceive ? dayjs(data?.timeReceive) : null,
       doctor: data?.doctor?.id,
       providerLabo: data?.supplier?.uuid,
       material: data?.laboSpecifications?.find((i) => i?.parameterType === 'MATERIAL')?.parameterId,
@@ -163,12 +163,12 @@ function Labo({ cusName, idCustomer, canEdit = true, showText = true }) {
       bite: data?.laboSpecifications?.find((i) => i?.parameterType === 'BITE')?.parameterId,
       line: data?.laboSpecifications?.find((i) => i?.parameterType === 'LINE')?.parameterId,
       span: data?.laboSpecifications?.find((i) => i?.parameterType === 'SPAN')?.parameterId,
-      realTimeReceive: isNullOrUndefinedOrEmpty(data?.warrantyPeriod) ? null : moment(data?.realTimeReceive),
+      realTimeReceive: isNullOrUndefinedOrEmpty(data?.warrantyPeriod) ? null : dayjs(data?.realTimeReceive),
       warrantyNo: data?.warrantyNo,
-      warrantyPeriod: isNullOrUndefinedOrEmpty(data?.warrantyPeriod) ? null : moment(data?.warrantyPeriod),
+      warrantyPeriod: isNullOrUndefinedOrEmpty(data?.warrantyPeriod) ? null : dayjs(data?.warrantyPeriod),
       total: isNullOrUndefinedOrEmpty(data?.total) ? null : data?.total,
       price: data?.price ?? 0,
-      timeExport: data?.timeExport ? moment(data?.timeExport) : null,
+      timeExport: data?.timeExport ? dayjs(data?.timeExport) : null,
       soServiceItemUuid: data?.soServiceItemUuid,
       soUuid: data?.soUuid,
     });
@@ -241,7 +241,7 @@ function Labo({ cusName, idCustomer, canEdit = true, showText = true }) {
           <DatePicker
             allowClear
             className="!w-full h-[42px] !bg-white"
-            // defaultValue={moment(new Date()).format('DD/MM/YYYY')}
+            // defaultValue={dayjs(new Date()).format('DD/MM/YYYY')}
             format={'DD/MM/YYYY'}
           />
         </div> */}
@@ -268,8 +268,8 @@ function Labo({ cusName, idCustomer, canEdit = true, showText = true }) {
       supplier: { uuid: value.providerLabo },
       doctor: { id: value.doctor },
       type: 'NEW',
-      timeSend: value.timeSend ? moment(value.timeSend).format('YYYY-MM-DD HH:mm:ss') : null,
-      timeReceive: value.timeReceive ? moment(value.timeReceive).format('YYYY-MM-DD HH:mm:ss') : null,
+      timeSend: value.timeSend ? dayjs(value.timeSend).format('YYYY-MM-DD HH:mm:ss') : null,
+      timeReceive: value.timeReceive ? dayjs(value.timeReceive).format('YYYY-MM-DD HH:mm:ss') : null,
       prostheticsType: value.prostheticsType,
       brand: value.brand,
       teeth: type === 'addNew' ? value.teeth && value.teeth.map((i) => i.teethNumber) : value.teeth,
@@ -285,11 +285,11 @@ function Labo({ cusName, idCustomer, canEdit = true, showText = true }) {
     };
     if (statusLabo === 'RECEIVED') {
       dataCreate.realTimeReceive = value.realTimeReceive
-        ? moment(value.realTimeReceive).format('YYYY-MM-DD hh:mm:ss')
+        ? dayjs(value.realTimeReceive).format('YYYY-MM-DD hh:mm:ss')
         : null;
       dataCreate.warrantyNo = value.warrantyNo ?? null;
       dataCreate.warrantyPeriod = value.warrantyPeriod
-        ? moment(value.warrantyPeriod).format('YYYY-MM-DD hh:mm:ss')
+        ? dayjs(value.warrantyPeriod).format('YYYY-MM-DD hh:mm:ss')
         : null;
     }
 
@@ -328,9 +328,9 @@ function Labo({ cusName, idCustomer, canEdit = true, showText = true }) {
     if (step === 2) {
       const dataReceive = {
         uuid: data?.uuid,
-        realTimeReceive: moment(value.realTimeReceive).format('YYYY-MM-DD HH:mm:ss'),
+        realTimeReceive: dayjs(value.realTimeReceive).format('YYYY-MM-DD HH:mm:ss'),
         warrantyNo: value.warrantyNo,
-        warrantyPeriod: value.warrantyPeriod ? moment(value.warrantyPeriod).format('YYYY-MM-DD HH:mm:ss') : null,
+        warrantyPeriod: value.warrantyPeriod ? dayjs(value.warrantyPeriod).format('YYYY-MM-DD HH:mm:ss') : null,
       };
       const res = await LaboService.receiveLabo(dataReceive);
       setOpenModal(false);
@@ -353,7 +353,7 @@ function Labo({ cusName, idCustomer, canEdit = true, showText = true }) {
       onConfirm: async () => {
         const dataExport = {
           uuid: data?.uuid,
-          timeExport: moment(value.timeExport ?? form.getFieldValue('timeExport')).format('YYYY-MM-DD HH:mm:ss'),
+          timeExport: dayjs(value.timeExport ?? form.getFieldValue('timeExport')).format('YYYY-MM-DD HH:mm:ss'),
         };
 
         const res = await LaboService.exportLabo(dataExport);

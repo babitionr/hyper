@@ -6,6 +6,7 @@ import { CustomerExaminationService } from 'services/customer-examination';
 import { MedicalHistory } from './medicalHistory';
 import { useAuth } from 'global';
 import { AuthSerivce } from 'services/Auth';
+import './index.less';
 
 const CustomerExamination = ({ idCustomer }) => {
   const [form] = Form.useForm();
@@ -206,18 +207,20 @@ const CustomerExamination = ({ idCustomer }) => {
                   }}
                   value={buttonCheck}
                 >
-                  <Checkbox className="w-1/4" value={'1'}>
-                    X-quang
-                  </Checkbox>
-                  <Checkbox className="w-1/4" value={'2'}>
-                    Xét nghiệm
-                  </Checkbox>
-                  <Checkbox className="w-1/4" value={'3'}>
-                    Ảnh
-                  </Checkbox>
-                  <Checkbox className="w-1/4" value={'4'}>
-                    Khác
-                  </Checkbox>
+                  <div className="w-full custom1">
+                    <Checkbox className="w-1/4" value={'1'}>
+                      X-quang
+                    </Checkbox>
+                    <Checkbox className="w-1/4" value={'2'}>
+                      Xét nghiệm
+                    </Checkbox>
+                    <Checkbox className="w-1/4" value={'3'}>
+                      Ảnh
+                    </Checkbox>
+                    <Checkbox className="w-1/4" value={'4'}>
+                      Khác
+                    </Checkbox>
+                  </div>
                 </Checkbox.Group>
               </div>
               {['1', '2', '3', '4'].includes(buttonCheck) && (

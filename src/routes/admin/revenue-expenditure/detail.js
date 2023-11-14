@@ -176,7 +176,7 @@ function Page() {
               <Form colon={false} form={form} onFinish={handleSubmit} initialValues={data}>
                 <div>
                   <div>
-                    <div className="w-full flex flex-col sm:flex-row gap-4 items-center">
+                    <div className="w-full flex sm:flex-row items-center">
                       {/* <div className="w-4/12"></div> */}
                       {/* <Form.Item className="w-full sm:w-4/12" label="Người tạo" name="createdBy">
                         <Input
@@ -184,63 +184,67 @@ function Page() {
                           placeholder="Nhập người tạo"
                         />
                       </Form.Item> */}
-                      <Form.Item
-                        className="w-full sm:w-4/12"
-                        label="Ngày xuất"
-                        name="billDate"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Vui lòng chọn ngày xuất!',
-                          },
-                        ]}
-                        initialValue={moment()}
-                      >
+                      <div className="w-1/3 !mb-4 mr-4">
+                        <Form.Item
+                          className="w-1/3 sm:w-1/3 !m-0 custom1"
+                          label="Ngày xuất"
+                          name="billDate"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Vui lòng chọn ngày xuất!',
+                            },
+                          ]}
+                          initialValue={moment()}
+                        ></Form.Item>
+
                         <DatePicker
                           placeholder="DD/MM/YYYY"
-                          className="h-10 text-sm font-normal block w-full rounded-lg border border-gray-200  py-[7px] px-4 focus:outline-none !bg-white"
+                          className="h-10 text-sm font-normal block w-full rounded-lg border border-gray-200  py-[7px] px-4 focus:outline-none !bg-white custom1"
                           format="DD/MM/YYYY"
                           disabledDate={(current) => {
                             const value = moment();
                             return current && current.isAfter(value, 'day');
                           }}
                         />
-                      </Form.Item>
+                      </div>
                       {+type === 2 && (
-                        <Form.Item
-                          className="w-4/12"
-                          name="groupExpense"
-                          label="Nhóm chi phí"
-                          rules={[
-                            {
-                              required: true,
-                              message: 'Vui lòng chọn nhóm chi phí!',
-                            },
-                          ]}
-                        >
+                        <div className="w-1/3 !-mt-6 mr-4">
+                          <Form.Item
+                            className="w-1/3 !m-0 custom1"
+                            name="groupExpense"
+                            label="Nhóm chi phí"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Vui lòng chọn nhóm chi phí!',
+                              },
+                            ]}
+                          ></Form.Item>
                           <Select
-                            className="w-full !rounded-lg  text-sm font-normal"
+                            className="w-full !rounded-lg  text-sm font-normal custom1"
                             placeholder="Chọn nhóm chi phí"
                             options={groupExpense.map((i) => ({ label: i.name, value: i.uuid, code: i.code }))}
                             onChange={(value, options) => {
                               setGroupCode(options?.code);
                             }}
                           ></Select>
-                        </Form.Item>
+                        </div>
                       )}
-                      <Form.Item
-                        className="w-full sm:w-4/12"
-                        label="Hình thức"
-                        name="form"
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Vui lòng chọn hình thức!',
-                          },
-                        ]}
-                      >
+                      <div className="w-1/3 !-mt-6">
+                        <Form.Item
+                          className="w-1/3 sm:w-1/3 !h-full !m-0 custom1"
+                          label="Hình thức"
+                          name="form"
+                          rules={[
+                            {
+                              required: true,
+                              message: 'Vui lòng chọn hình thức!',
+                            },
+                          ]}
+                        ></Form.Item>
                         <Select
-                          className="w-full !rounded-lg"
+                          className="w-full !rounded-lg custom1"
                           placeholder="Chọn hình thức"
                           allowClear
                           options={[
@@ -250,7 +254,7 @@ function Page() {
                             { value: 'INS', label: 'Trả góp' },
                           ]}
                         ></Select>
-                      </Form.Item>
+                      </div>
                       {+type === 1 && pageType === 'edit' && (
                         <Form.Item className="w-4/12" name="customerName" label="Tên khách hàng">
                           <Input
@@ -311,42 +315,44 @@ function Page() {
                     )}
 
                     {+type === 1 ? (
-                      <div className="w-full flex  flex-col sm:flex-row justify-between gap-4">
-                        <Form.Item
-                          className="w-full"
-                          label="Nội dung"
-                          name="note"
-                          rules={[
-                            {
-                              required: true,
-                              message: 'Vui lòng nhập nội dung!',
-                            },
-                          ]}
-                        >
+                      <div className="w-full flex  flex-col sm:flex-row justify-between gap-4 !mb-6">
+                        <div className="w-full custom1">
+                          <Form.Item
+                            className="w-full !m-0"
+                            label="Nội dung"
+                            name="note"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Vui lòng nhập nội dung!',
+                              },
+                            ]}
+                          ></Form.Item>
                           <Input
-                            className="h-10 text-sm font-normal block w-full rounded-lg border border-gray-200  py-[7px] px-4 focus:outline-none"
+                            className="h-10 text-sm font-normal block w-full rounded-lg border border-gray-200  py-[7px] px-4 focus:outline-none custom2 custom1"
                             placeholder="Nhập nội dung"
                           />
-                        </Form.Item>
+                        </div>
                       </div>
                     ) : (
-                      <div className="w-full flex  flex-col sm:flex-row justify-between gap-4">
-                        <Form.Item
-                          className="w-full"
-                          label="Khoản chi"
-                          name="note"
-                          rules={[
-                            {
-                              required: true,
-                              message: 'Vui lòng nhập khoản chi!',
-                            },
-                          ]}
-                        >
+                      <div className="w-full flex  flex-col sm:flex-row justify-between gap-4 !mb-6">
+                        <div className="w-full">
+                          <Form.Item
+                            className="w-full custom1 !m-0"
+                            label="Khoản chi"
+                            name="note"
+                            rules={[
+                              {
+                                required: true,
+                                message: 'Vui lòng nhập khoản chi!',
+                              },
+                            ]}
+                          ></Form.Item>
                           <Input
-                            className="h-10 text-sm font-normal block w-full rounded-lg border border-gray-200  py-[7px] px-4 focus:outline-none"
+                            className="h-10 text-sm font-normal block w-full rounded-lg border border-gray-200  py-[7px] px-4 focus:outline-none custom1 custom2"
                             placeholder="Nhập Khoản chi"
                           />
-                        </Form.Item>
+                        </div>
                       </div>
                     )}
 
